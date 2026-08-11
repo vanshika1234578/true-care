@@ -39,7 +39,21 @@ function whatsappHref(prefill: string) {
 
 export default function KneeReplacementLanding() {
   const [lang, setLang] = useState<Lang>("en");
+  const [langManuallySet, setLangManuallySet] = useState(false);
   const t = content[lang];
+
+  const chooseLang = (next: Lang) => {
+    setLang(next);
+    setLangManuallySet(true);
+    track("language_switch", { lang: next });
+  };
+
+  const autoDetectBangladesh = () => {
+    if (!langManuallySet && lang !== "bn") {
+      setLang("bn");
+      track("language_switch", { lang: "bn", trigger: "auto_detect_phone" });
+    }
+  };
 
   const heroWhatsapp = whatsappHref(
     lang === "en"
@@ -57,10 +71,7 @@ export default function KneeReplacementLanding() {
           </span>
           <div className="flex items-center gap-1 rounded-full bg-white p-1 text-xs font-semibold shadow-card dark:bg-white/10">
             <button
-              onClick={() => {
-                setLang("en");
-                track("language_switch", { lang: "en" });
-              }}
+              onClick={() => chooseLang("en")}
               className={`rounded-full px-3 py-1 transition-colors ${
                 lang === "en" ? "bg-primary-500 text-white" : "text-navy-400 dark:text-white/60"
               }`}
@@ -68,10 +79,7 @@ export default function KneeReplacementLanding() {
               {content.en.langToggle.en}
             </button>
             <button
-              onClick={() => {
-                setLang("bn");
-                track("language_switch", { lang: "bn" });
-              }}
+              onClick={() => chooseLang("bn")}
               className={`rounded-full px-3 py-1 transition-colors ${
                 lang === "bn" ? "bg-primary-500 text-white" : "text-navy-400 dark:text-white/60"
               }`}
@@ -351,7 +359,7 @@ export default function KneeReplacementLanding() {
               </p>
             </div>
             <div className="mt-8 rounded-2xl border border-navy-100/70 bg-white p-6 shadow-card dark:border-white/10 dark:bg-white/5 sm:p-8">
-              <ReportForm lang={lang} whatsappNumber={WHATSAPP_NUMBER} />
+              <ReportForm lang={lang} whatsappNumber={WHATSAPP_NUMBER} onDetectBangladeshNumber={autoDetectBangladesh} />
             </div>
           </div>
         </Container>

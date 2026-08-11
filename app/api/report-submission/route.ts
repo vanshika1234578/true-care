@@ -1,20 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { sendWhatsAppConfirmation } from "@/lib/whatsapp";
 
-// Server-side only. Files are never written to disk or any public path —
-// they are streamed into memory and attached directly to an outbound email.
-// This means there is no public URL that could ever expose a patient's report.
+// Files are uploaded directly from the browser to Vercel Blob (see
+// app/api/report-upload/route.ts) — this route only ever receives a small
+// JSON payload with the resulting Blob URLs, well within Vercel's 4.5MB
+// function body limit. Reports themselves never pass through this function.
 
-const MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024; // 10MB per file
-const MAX_FILES = 5;
-const ALLOWED_MIME_TYPES = new Set([
-  "application/pdf",
-  "image/jpeg",
-  "image/png",
-  "image/webp",
-  "application/msword",
-  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-]);
+type Body = {
+  name?: string;
+  country?: string;
+  whatsapp?: string;
+  email?: string;
+  age?: string;
+  condition?: string;
+  timeline?: string;
+  source?: string;
+  reportUrls?: string[];
+  lang?: "en" | "bn";
+};
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -29,27 +33,42 @@ function escapeHtml(value: string) {
     .replace(/'/g, "&#39;");
 }
 
+// Only allow report URLs actually hosted on Vercel Blob, so this route can
+// never be used to make the server email an arbitrary attacker-supplied link.
+function isTrustedBlobUrl(url: string) {
+  try {
+    const parsed = new URL(url);
+    return parsed.hostname.endsWith(".public.blob.vercel-storage.com");
+  } catch {
+    return false;
+  }
+}
+
 export async function POST(req: NextRequest) {
-  let formData: FormData;
+  let body: Body;
 
   try {
-    formData = await req.formData();
+    body = await req.json();
   } catch {
-    return NextResponse.json({ error: "Invalid form submission." }, { status: 400 });
+    return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  const name = String(formData.get("name") || "").trim();
-  const country = String(formData.get("country") || "").trim();
-  const whatsapp = String(formData.get("whatsapp") || "").trim();
-  const email = String(formData.get("email") || "").trim();
-  const age = String(formData.get("age") || "").trim();
-  const condition = String(formData.get("condition") || "").trim();
-  const timeline = String(formData.get("timeline") || "").trim();
-  const source = String(formData.get("source") || "knee-replacement-india-bd").trim();
+  const {
+    name = "",
+    country = "Bangladesh",
+    whatsapp = "",
+    email = "",
+    age = "",
+    condition = "",
+    timeline = "",
+    source = "knee-replacement-india-bd",
+    reportUrls = [],
+    lang = "en",
+  } = body;
 
-  if (!name || !country || !whatsapp || !condition) {
+  if (!name.trim() || !whatsapp.trim() || !condition.trim()) {
     return NextResponse.json(
-      { error: "Name, country, WhatsApp number, and condition details are required." },
+      { error: "Name, WhatsApp number, and condition details are required." },
       { status: 400 }
     );
   }
@@ -58,53 +77,27 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Please provide a valid email address." }, { status: 400 });
   }
 
-  const files = formData.getAll("reports").filter((f): f is File => f instanceof File && f.size > 0);
-
-  if (files.length > MAX_FILES) {
-    return NextResponse.json(
-      { error: `Please upload no more than ${MAX_FILES} files.` },
-      { status: 400 }
-    );
-  }
-
-  const attachments: { filename: string; content: Buffer; contentType: string }[] = [];
-
-  for (const file of files) {
-    if (file.size > MAX_FILE_SIZE_BYTES) {
-      return NextResponse.json(
-        { error: `"${file.name}" is larger than the 10MB limit per file.` },
-        { status: 400 }
-      );
-    }
-    if (!ALLOWED_MIME_TYPES.has(file.type)) {
-      return NextResponse.json(
-        { error: `"${file.name}" has an unsupported file type. Please upload PDF, JPG, PNG, or Word documents.` },
-        { status: 400 }
-      );
-    }
-    const arrayBuffer = await file.arrayBuffer();
-    attachments.push({
-      filename: file.name,
-      content: Buffer.from(arrayBuffer),
-      contentType: file.type,
-    });
+  if (!Array.isArray(reportUrls) || reportUrls.some((u) => typeof u !== "string" || !isTrustedBlobUrl(u))) {
+    return NextResponse.json({ error: "Invalid report file reference." }, { status: 400 });
   }
 
   const submission = {
-    name,
-    country,
-    whatsapp,
-    email: email || "Not provided",
-    age: age || "Not provided",
-    condition,
-    timeline: timeline || "Not specified",
-    source,
-    fileCount: attachments.length,
+    name: name.trim(),
+    country: country.trim(),
+    whatsapp: whatsapp.trim(),
+    email: email.trim() || "Not provided",
+    age: age.trim() || "Not provided",
+    condition: condition.trim(),
+    timeline: timeline.trim() || "Not specified",
+    source: source.trim(),
+    reportUrls,
     submittedAt: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
   };
 
-  // Server-side log as a fallback record. Deliberately excludes file contents.
-  console.log("New TrueCare medical report submission:", submission);
+  console.log("New TrueCare medical report submission:", {
+    ...submission,
+    reportUrls: submission.reportUrls.map((_, i) => `[report file ${i + 1}]`),
+  });
 
   const gmailUser = process.env.GMAIL_USER;
   const gmailAppPassword = process.env.GMAIL_APP_PASSWORD;
@@ -131,7 +124,7 @@ export async function POST(req: NextRequest) {
       ["Age", submission.age],
       ["Preferred timeline", submission.timeline],
       ["Campaign source", submission.source],
-      ["Reports attached", String(submission.fileCount)],
+      ["Reports attached", String(submission.reportUrls.length)],
       ["Submitted at", submission.submittedAt],
     ];
 
@@ -145,6 +138,16 @@ export async function POST(req: NextRequest) {
       )
       .join("");
 
+    const reportLinksHtml =
+      submission.reportUrls.length > 0
+        ? `<p style="margin-top:16px;font-weight:600;color:#0B1E3F;">Medical report files:</p>
+           <ul style="margin-top:4px;padding-left:18px;color:#2F6FE4;">
+             ${submission.reportUrls
+               .map((url, i) => `<li><a href="${escapeHtml(url)}" style="color:#2F6FE4;">Report file ${i + 1}</a></li>`)
+               .join("")}
+           </ul>`
+        : `<p style="margin-top:16px;color:#94a3b8;">No files attached — patient may send reports separately via WhatsApp.</p>`;
+
     const html = `
       <div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;margin:0 auto;">
         <h2 style="color:#0B1E3F;">New Knee Replacement Inquiry — Bangladesh Campaign</h2>
@@ -155,11 +158,7 @@ export async function POST(req: NextRequest) {
             submission.condition
           )}</p>
         </div>
-        ${
-          attachments.length > 0
-            ? `<p style="margin-top:16px;color:#334155;">${attachments.length} medical report file(s) attached to this email.</p>`
-            : `<p style="margin-top:16px;color:#94a3b8;">No files attached — patient may send reports separately via WhatsApp.</p>`
-        }
+        ${reportLinksHtml}
       </div>
     `;
 
@@ -176,13 +175,16 @@ export async function POST(req: NextRequest) {
         `Email: ${submission.email}`,
         `Age: ${submission.age}`,
         `Preferred timeline: ${submission.timeline}`,
-        `Reports attached: ${submission.fileCount}`,
+        `Reports attached: ${submission.reportUrls.length}`,
         `Submitted at: ${submission.submittedAt}`,
         "",
         "Condition description:",
         submission.condition,
+        "",
+        ...(submission.reportUrls.length > 0
+          ? ["Report files:", ...submission.reportUrls.map((u, i) => `  ${i + 1}. ${u}`)]
+          : []),
       ].join("\n"),
-      attachments,
     });
   } catch (err) {
     console.error("Failed to send report submission email:", err);
@@ -195,11 +197,21 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // Best-effort: send an automated WhatsApp confirmation to the patient.
+  // Safely no-ops if WhatsApp Business API credentials aren't configured —
+  // never blocks or fails the submission response.
+  try {
+    const result = await sendWhatsAppConfirmation({
+      toWhatsappNumber: submission.whatsapp,
+      patientName: submission.name,
+      templateLanguage: lang,
+    });
+    if (!result.sent) {
+      console.log("WhatsApp confirmation not sent:", result.reason);
+    }
+  } catch (err) {
+    console.error("Unexpected error sending WhatsApp confirmation:", err);
+  }
+
   return NextResponse.json({ success: true }, { status: 200 });
 }
-
-// Note: App Router route handlers parse multipart/form-data natively via
-// req.formData() — no bodyParser config (a Pages Router concept) is needed here.
-// If large report uploads are rejected in production, check your hosting
-// platform's request body size limit (e.g. Vercel's default is 4.5MB per
-// request on Serverless Functions) and raise it if necessary.
