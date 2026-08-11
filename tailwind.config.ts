@@ -60,6 +60,8 @@ const config: Config = {
       fontFamily: {
         display: ["var(--font-manrope)", "sans-serif"],
         body: ["var(--font-inter)", "sans-serif"],
+        // Used only via the "font-bengali" utility class on pages with Bengali content.
+        bengali: ["var(--font-noto-bengali)", "var(--font-inter)", "sans-serif"],
       },
       borderRadius: {
         xl2: "1.25rem",

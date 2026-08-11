@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Manrope } from "next/font/google";
+import { Inter, Manrope, Noto_Sans_Bengali } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -14,6 +14,14 @@ const inter = Inter({
 const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-manrope",
+  display: "swap",
+});
+
+// Used only on pages with Bengali content (e.g. /bd/knee-replacement-india) via the
+// "font-bengali" utility class — does not change the default font on any other page.
+const notoSansBengali = Noto_Sans_Bengali({
+  subsets: ["bengali"],
+  variable: "--font-noto-bengali",
   display: "swap",
 });
 
@@ -54,7 +62,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${manrope.variable} font-body`}>
+      <body className={`${inter.variable} ${manrope.variable} ${notoSansBengali.variable} font-body`}>
         <ThemeProvider>
           <Header />
           <main>{children}</main>
