@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   MessageCircle,
   CheckCircle2,
@@ -19,13 +20,17 @@ import {
 import Container from "@/components/Container";
 import Button from "@/components/Button";
 import FAQAccordion from "@/components/FAQAccordion";
-import { doctors, hospitals } from "@/lib/data";
+import { doctors, hospitals, testimonials } from "@/lib/data";
 import { content, type Lang } from "./content";
 import ReportForm from "./ReportForm";
+import LeadModal from "./LeadModal";
+import TestimonialCard from "@/components/TestimonialCard";
 
 const WHATSAPP_NUMBER = "919720574548";
+const LEAD_MODAL_SESSION_KEY = "truecare_bd_knee_lead_modal_dismissed";
 const doctor = doctors.find((d) => d.slug === "dr-atul-mishra");
 const hospital = hospitals.find((h) => h.slug === "fortis-hospital-noida");
+const relevantTestimonial = testimonials.find((t) => t.treatment === "Orthopedics");
 
 function track(event: string, extra?: Record<string, unknown>) {
   if (typeof window !== "undefined" && (window as any).dataLayer) {
@@ -37,10 +42,42 @@ function whatsappHref(prefill: string) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(prefill)}`;
 }
 
-export default function KneeReplacementLanding() {
-  const [lang, setLang] = useState<Lang>("en");
+export default function KneeReplacementLanding({ initialLang = "en" }: { initialLang?: Lang }) {
+  const [lang, setLang] = useState<Lang>(initialLang);
   const [langManuallySet, setLangManuallySet] = useState(false);
+  const [showLeadModal, setShowLeadModal] = useState(false);
   const t = content[lang];
+
+  useEffect(() => {
+    let alreadyDismissed = false;
+    try {
+      alreadyDismissed = sessionStorage.getItem(LEAD_MODAL_SESSION_KEY) === "1";
+    } catch {
+      // sessionStorage can throw in some privacy modes — fail safe by showing the modal.
+    }
+    if (alreadyDismissed) return;
+
+    const timer = setTimeout(() => {
+      setShowLeadModal(true);
+      track("lead_modal_shown");
+    }, 900);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const closeLeadModal = () => {
+    setShowLeadModal(false);
+    track("lead_modal_closed");
+    markModalDismissedThisSession();
+  };
+
+  const markModalDismissedThisSession = () => {
+    try {
+      sessionStorage.setItem(LEAD_MODAL_SESSION_KEY, "1");
+    } catch {
+      // Ignore — worst case the modal may reappear on a later page load this session.
+    }
+  };
 
   const chooseLang = (next: Lang) => {
     setLang(next);
@@ -204,9 +241,15 @@ export default function KneeReplacementLanding() {
               {t.doctor.title}
             </h2>
             <div className="mx-auto max-w-2xl rounded-2xl border border-navy-100/70 bg-white p-8 text-center shadow-card dark:border-white/10 dark:bg-white/5">
-              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-teal-400 font-display text-lg font-bold text-white">
-                {doctor.name.replace("Dr. ", "").split(" ").map((n) => n.charAt(0)).join("")}
-              </div>
+              {doctor.photo ? (
+                <div className="relative mx-auto h-20 w-20 overflow-hidden rounded-full">
+                  <Image src={doctor.photo} alt={doctor.name} fill className="object-cover" sizes="80px" />
+                </div>
+              ) : (
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-teal-400 font-display text-lg font-bold text-white">
+                  {doctor.name.replace("Dr. ", "").split(" ").map((n) => n.charAt(0)).join("")}
+                </div>
+              )}
               <h3 className="mt-4 font-display text-lg font-semibold text-navy-500 dark:text-white">
                 {doctor.name}
               </h3>
@@ -256,7 +299,13 @@ export default function KneeReplacementLanding() {
             <h2 className="mb-8 text-center font-display text-2xl font-bold text-navy-500 dark:text-white sm:text-3xl">
               {t.hospital.title}
             </h2>
-            <div className="mx-auto max-w-2xl rounded-2xl border border-navy-100/70 bg-white p-8 shadow-card dark:border-white/10 dark:bg-white/5">
+            <div className="mx-auto max-w-2xl overflow-hidden rounded-2xl border border-navy-100/70 bg-white shadow-card dark:border-white/10 dark:bg-white/5">
+              {hospital.image && (
+                <div className="relative h-44 w-full">
+                  <Image src={hospital.image} alt={hospital.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 700px" />
+                </div>
+              )}
+              <div className="p-8">
               <div className="flex items-start gap-3">
                 <Building2 size={22} className="mt-0.5 flex-shrink-0 text-primary-500" />
                 <div>
@@ -289,6 +338,18 @@ export default function KneeReplacementLanding() {
               >
                 {t.hospital.infoLabel} →
               </Link>
+              </div>
+            </div>
+          </Container>
+        </section>
+      )}
+
+      {/* Testimonial */}
+      {relevantTestimonial && (
+        <section className="py-12">
+          <Container>
+            <div className="mx-auto max-w-xl">
+              <TestimonialCard {...relevantTestimonial} />
             </div>
           </Container>
         </section>
@@ -454,6 +515,15 @@ export default function KneeReplacementLanding() {
         <MessageCircle size={20} />
         <span className="hidden sm:inline">{t.whatsappFloat}</span>
       </a>
+
+      <LeadModal
+        open={showLeadModal}
+        onClose={closeLeadModal}
+        onSubmitSuccess={markModalDismissedThisSession}
+        lang={lang}
+        whatsappNumber={WHATSAPP_NUMBER}
+        onDetectBangladeshNumber={autoDetectBangladesh}
+      />
     </div>
   );
 }

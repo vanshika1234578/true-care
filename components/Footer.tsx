@@ -22,6 +22,14 @@ const columns = [
       { href: "/patient-stories", label: "Patient Stories" },
     ],
   },
+  {
+    title: "Legal",
+    links: [
+      { href: "/privacy", label: "Privacy Policy" },
+      { href: "/terms", label: "Terms of Service" },
+      { href: "/medical-disclaimer", label: "Medical Disclaimer" },
+    ],
+  },
 ];
 
 export default function Footer() {

@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import * as Sentry from "@sentry/nextjs";
 import { sendWhatsAppConfirmation } from "@/lib/whatsapp";
+import { verifyTurnstileToken } from "@/lib/turnstile";
+import { appendLeadToSheet } from "@/lib/googleSheets";
 
 // Files are uploaded directly from the browser to Vercel Blob (see
 // app/api/report-upload/route.ts) — this route only ever receives a small
@@ -18,6 +21,7 @@ type Body = {
   source?: string;
   reportUrls?: string[];
   lang?: "en" | "bn";
+  turnstileToken?: string | null;
 };
 
 function isValidEmail(email: string) {
@@ -64,7 +68,14 @@ export async function POST(req: NextRequest) {
     source = "knee-replacement-india-bd",
     reportUrls = [],
     lang = "en",
+    turnstileToken = null,
   } = body;
+
+  const clientIp = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+  const captchaOk = await verifyTurnstileToken(turnstileToken, clientIp);
+  if (!captchaOk) {
+    return NextResponse.json({ error: "Verification failed. Please try again." }, { status: 400 });
+  }
 
   if (!name.trim() || !whatsapp.trim() || !condition.trim()) {
     return NextResponse.json(
@@ -188,6 +199,7 @@ export async function POST(req: NextRequest) {
     });
   } catch (err) {
     console.error("Failed to send report submission email:", err);
+    Sentry.captureException(err, { tags: { flow: "report-submission-email" } });
     return NextResponse.json(
       {
         error:
@@ -195,6 +207,27 @@ export async function POST(req: NextRequest) {
       },
       { status: 200 }
     );
+  }
+
+  // Best-effort: log this lead as a row in a Google Sheet, if configured.
+  try {
+    const sheetResult = await appendLeadToSheet([
+      submission.submittedAt,
+      submission.name,
+      submission.whatsapp,
+      submission.email,
+      submission.age,
+      submission.timeline,
+      submission.condition,
+      String(submission.reportUrls.length),
+      submission.reportUrls.join(" | "),
+      submission.source,
+    ]);
+    if (!sheetResult.logged) {
+      console.log("Lead not logged to Google Sheet:", sheetResult.reason);
+    }
+  } catch (err) {
+    console.error("Unexpected error logging lead to Google Sheet:", err);
   }
 
   // Best-effort: send an automated WhatsApp confirmation to the patient.

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import { MapPin, BadgeCheck, MessageCircle, Stethoscope } from "lucide-react";
 import Section from "@/components/Section";
 import Container from "@/components/Container";
@@ -28,6 +29,12 @@ export default function HospitalDetailPage({ params }: { params: { slug: string 
 
   return (
     <>
+      {hospital.image && (
+        <div className="relative h-56 w-full sm:h-72">
+          <Image src={hospital.image} alt={hospital.name} fill className="object-cover" priority sizes="100vw" />
+          <div className="absolute inset-0 bg-gradient-to-t from-navy-900/50 to-transparent" />
+        </div>
+      )}
       <section className="bg-hero-gradient pb-6 pt-16 dark:bg-hero-gradient-dark">
         <Container>
           <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-50 font-display text-2xl font-bold text-primary-600 dark:bg-primary-500/10 dark:text-primary-300">

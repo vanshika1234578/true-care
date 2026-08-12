@@ -1,20 +1,26 @@
 import type { Metadata } from "next";
 import KneeReplacementLanding from "./KneeReplacementLanding";
 
-const PAGE_URL = "https://truecare24.in/bd/knee-replacement-india";
+const PAGE_URL_EN = "https://truecare24.in/bd/knee-replacement-india";
+const PAGE_URL_BN = "https://truecare24.in/bd/knee-replacement-india/bn";
 
 export const metadata: Metadata = {
   title: "Knee Replacement in India for International Patients | TrueCare",
   description:
     "Explore knee replacement treatment options in India. Learn about the process, specialist review, hospital coordination, costs and international patient support.",
   alternates: {
-    canonical: PAGE_URL,
+    canonical: PAGE_URL_EN,
+    languages: {
+      en: PAGE_URL_EN,
+      bn: PAGE_URL_BN,
+      "x-default": PAGE_URL_EN,
+    },
   },
   openGraph: {
     title: "Knee Replacement in India for International Patients | TrueCare",
     description:
       "Explore knee replacement treatment options in India with hospital coordination and international patient support from TrueCare.",
-    url: PAGE_URL,
+    url: PAGE_URL_EN,
     type: "website",
   },
   twitter: {
@@ -90,7 +96,7 @@ const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://truecare24.in" },
-    { "@type": "ListItem", position: 2, name: "Knee Replacement in India", item: PAGE_URL },
+    { "@type": "ListItem", position: 2, name: "Knee Replacement in India", item: PAGE_URL_EN },
   ],
 };
 
@@ -105,7 +111,7 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <KneeReplacementLanding />
+      <KneeReplacementLanding initialLang="en" />
     </>
   );
 }

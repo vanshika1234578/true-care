@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, useState, FormEvent } from "react";
+import { useRef, useState, useEffect, FormEvent } from "react";
+import Script from "next/script";
 import { upload } from "@vercel/blob/client";
 import { Loader2, CheckCircle2, AlertCircle, Upload, X, FileText, CheckCircle } from "lucide-react";
 import Button from "@/components/Button";
@@ -24,10 +25,12 @@ export default function ReportForm({
   lang,
   whatsappNumber,
   onDetectBangladeshNumber,
+  onSubmitSuccess,
 }: {
   lang: Lang;
   whatsappNumber: string;
   onDetectBangladeshNumber?: () => void;
+  onSubmitSuccess?: () => void;
 }) {
   const t = content[lang].reportForm;
   const [name, setName] = useState("");
@@ -41,6 +44,18 @@ export default function ReportForm({
   const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const formRenderedAt = useRef(Date.now());
+  const honeypotRef = useRef<HTMLInputElement>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
+  useEffect(() => {
+    if (!turnstileSiteKey || typeof window === "undefined") return;
+    (window as any).onTurnstileVerified = (token: string) => setTurnstileToken(token);
+    return () => {
+      delete (window as any).onTurnstileVerified;
+    };
+  }, [turnstileSiteKey]);
 
   const handleWhatsappChange = (value: string) => {
     setWhatsapp(value);
@@ -71,7 +86,13 @@ export default function ReportForm({
   const validate = () => {
     const errs: Record<string, string> = {};
     if (!name.trim()) errs.name = t.errors.name;
-    if (!whatsapp.trim()) errs.whatsapp = t.errors.whatsapp;
+    if (!whatsapp.trim()) {
+      errs.whatsapp = t.errors.whatsapp;
+    } else {
+      const digits = whatsapp.replace(/[^\d]/g, "");
+      const looksValid = /^\+?\d{8,15}$/.test(whatsapp.trim()) && digits.length >= 8 && digits.length <= 15;
+      if (!looksValid) errs.whatsapp = t.errors.whatsappFormat;
+    }
     if (!condition.trim()) errs.condition = t.errors.condition;
     for (const fs of fileStates) {
       if (fs.file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
@@ -79,6 +100,14 @@ export default function ReportForm({
       }
     }
     return errs;
+  };
+
+  // Returns true if this looks like a bot submission — never shown to the
+  // user as an error; we just quietly no-op instead of tipping off bots.
+  const looksLikeSpam = () => {
+    const honeypotFilled = !!honeypotRef.current?.value;
+    const submittedTooFast = Date.now() - formRenderedAt.current < 2500;
+    return honeypotFilled || submittedTooFast;
   };
 
   const uploadAllFiles = async (): Promise<string[]> => {
@@ -93,6 +122,7 @@ export default function ReportForm({
         const blob = await upload(fs.file.name, fs.file, {
           access: "public",
           handleUploadUrl: "/api/report-upload",
+          clientPayload: JSON.stringify({ turnstileToken }),
           onUploadProgress: ({ percentage }) => {
             setFileStates((prev) => {
               const next = [...prev];
@@ -122,9 +152,22 @@ export default function ReportForm({
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    if (looksLikeSpam()) {
+      // Pretend success to avoid signaling to bots what tripped the check.
+      setStatus("success");
+      return;
+    }
+
     const errs = validate();
     setFieldErrors(errs);
     if (Object.keys(errs).length > 0) return;
+
+    if (turnstileSiteKey && !turnstileToken) {
+      setStatus("error");
+      setError(t.errors.captchaRequired);
+      return;
+    }
 
     setError(null);
 
@@ -151,6 +194,7 @@ export default function ReportForm({
           source: "knee-replacement-india-bd",
           reportUrls,
           lang,
+          turnstileToken,
         }),
       });
 
@@ -165,6 +209,7 @@ export default function ReportForm({
       }
 
       setStatus("success");
+      onSubmitSuccess?.();
     } catch (err) {
       setStatus("error");
       setError(err instanceof Error ? err.message : t.errors.generic);
@@ -213,6 +258,18 @@ export default function ReportForm({
       noValidate
     >
       <p className="text-xs text-navy-300 dark:text-white/50">{t.requiredLegend}</p>
+
+      {/* Honeypot field — invisible to real users, bots often fill every field. */}
+      <input
+        ref={honeypotRef}
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        className="absolute left-[-9999px] h-0 w-0 opacity-0"
+        aria-hidden="true"
+      />
+
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label={t.fields.name} error={fieldErrors.name} required>
           <input
@@ -345,6 +402,13 @@ export default function ReportForm({
           <AlertCircle size={18} className="mt-0.5 flex-shrink-0" />
           <span>{error}</span>
         </div>
+      )}
+
+      {turnstileSiteKey && (
+        <>
+          <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
+          <div className="cf-turnstile" data-sitekey={turnstileSiteKey} data-callback="onTurnstileVerified" />
+        </>
       )}
 
       <Button

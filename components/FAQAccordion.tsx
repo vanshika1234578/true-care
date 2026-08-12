@@ -5,7 +5,7 @@ import { ChevronDown } from "lucide-react";
 
 type FAQ = { q: string; a: string };
 
-export default function FAQAccordion({ faqs }: { faqs: readonly FAQ[] }) {
+export default function FAQAccordion({ faqs }: { faqs: FAQ[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (

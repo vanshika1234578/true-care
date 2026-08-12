@@ -3,6 +3,7 @@ import { Inter, Manrope, Noto_Sans_Bengali } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CookieConsent from "@/components/CookieConsent";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
 const inter = Inter({
@@ -67,6 +68,7 @@ export default function RootLayout({
           <Header />
           <main>{children}</main>
           <Footer />
+          <CookieConsent />
         </ThemeProvider>
       </body>
     </html>

@@ -8,6 +8,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/about",
     "/contact",
+    "/privacy",
+    "/terms",
+    "/medical-disclaimer",
     "/treatments",
     "/hospitals",
     "/doctors",
@@ -17,11 +20,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/patient-stories",
     "/blog",
     "/bd/knee-replacement-india",
+    "/bd/knee-replacement-india/bn",
   ].map((path) => ({
     url: `${BASE_URL}${path}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
-    priority: path === "" ? 1 : path === "/bd/knee-replacement-india" ? 0.9 : 0.6,
+    priority: path === "" ? 1 : path.startsWith("/bd/knee-replacement-india") ? 0.9 : 0.6,
   }));
 
   const treatmentRoutes = treatments.map((t) => ({

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Briefcase, Languages, Stethoscope } from "lucide-react";
 import type { Doctor } from "@/lib/data";
 
@@ -10,9 +11,15 @@ export default function DoctorCard({ doctor }: { doctor: Doctor }) {
 
   return (
     <div className="flex flex-col items-center rounded-2xl border border-navy-100/70 bg-white p-6 text-center shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-glow dark:border-white/10 dark:bg-white/5">
-      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-teal-400 font-display text-lg font-bold text-white">
-        {initials}
-      </div>
+      {doctor.photo ? (
+        <div className="relative h-16 w-16 overflow-hidden rounded-full">
+          <Image src={doctor.photo} alt={doctor.name} fill className="object-cover" sizes="64px" />
+        </div>
+      ) : (
+        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-teal-400 font-display text-lg font-bold text-white">
+          {initials}
+        </div>
+      )}
       <h3 className="mt-4 font-display text-base font-semibold text-navy-500 dark:text-white">
         {doctor.name}
       </h3>

@@ -1,5 +1,7 @@
 import { handleUpload, type HandleUploadBody } from "@vercel/blob/client";
 import { NextResponse } from "next/server";
+import * as Sentry from "@sentry/nextjs";
+import { verifyTurnstileToken } from "@/lib/turnstile";
 
 // This route only ISSUES short-lived upload tokens to the browser — the actual
 // file bytes never pass through this (or any) serverless function, so Vercel's
@@ -29,7 +31,18 @@ export async function POST(request: Request) {
     const jsonResponse = await handleUpload({
       body,
       request,
-      onBeforeGenerateToken: async () => {
+      onBeforeGenerateToken: async (pathname, clientPayload) => {
+        let turnstileToken: string | null = null;
+        try {
+          turnstileToken = clientPayload ? JSON.parse(clientPayload).turnstileToken ?? null : null;
+        } catch {
+          // Malformed payload — treat as no token, verification below decides.
+        }
+        const captchaOk = await verifyTurnstileToken(turnstileToken);
+        if (!captchaOk) {
+          throw new Error("Verification failed.");
+        }
+
         return {
           allowedContentTypes: ALLOWED_CONTENT_TYPES,
           maximumSizeInBytes: MAX_SIZE_BYTES,
@@ -47,6 +60,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(jsonResponse);
   } catch (error) {
+    Sentry.captureException(error, { tags: { flow: "report-upload-authorization" } });
     return NextResponse.json(
       { error: error instanceof Error ? error.message : "Upload authorization failed." },
       { status: 400 }

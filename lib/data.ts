@@ -235,12 +235,14 @@ export type Hospital = {
   accreditations: string[];
   overview: string;
   beds: string;
+  image?: string;
 };
 
 export const hospitals: Hospital[] = [
   {
     slug: "apollo-hospitals-chennai",
     name: "Apollo Hospitals",
+    image: "https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?auto=format&fit=crop&w=800&q=75",
     city: "Chennai",
     specialties: ["Cardiology", "Oncology", "Orthopedics"],
     accreditations: ["JCI Accredited"],
@@ -250,6 +252,7 @@ export const hospitals: Hospital[] = [
   {
     slug: "fortis-escorts-heart-institute-delhi",
     name: "Fortis Escorts Heart Institute",
+    image: "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=800&q=75",
     city: "Delhi",
     specialties: ["Cardiology"],
     accreditations: ["Accreditation status — verify with hospital"],
@@ -259,6 +262,7 @@ export const hospitals: Hospital[] = [
   {
     slug: "medanta-the-medicity-gurugram",
     name: "Medanta – The Medicity",
+    image: "https://images.unsplash.com/photo-1481026469463-66327c86e544?auto=format&fit=crop&w=800&q=75",
     city: "Gurugram",
     specialties: ["Cardiology", "Neurology", "Transplant Surgery", "Cosmetic Surgery"],
     accreditations: ["JCI Accredited", "NABH Accredited", "NABL Accredited"],
@@ -268,6 +272,7 @@ export const hospitals: Hospital[] = [
   {
     slug: "max-healthcare-delhi",
     name: "Max Healthcare (Max Super Speciality)",
+    image: "https://images.unsplash.com/photo-1626315869436-d6781ba69d6e?auto=format&fit=crop&w=800&q=75",
     city: "Delhi",
     specialties: ["Cardiology", "Orthopedics", "Neurology", "Oncology"],
     accreditations: ["NABH Accredited"],
@@ -277,6 +282,7 @@ export const hospitals: Hospital[] = [
   {
     slug: "max-super-speciality-noida",
     name: "Max Super Speciality Hospital, Noida",
+    image: "https://images.unsplash.com/photo-1490351267196-b7a67e26e41b?auto=format&fit=crop&w=800&q=75",
     city: "Noida",
     specialties: ["Cardiology", "Oncology", "Transplant Surgery"],
     accreditations: ["Accreditation status — verify with hospital"],
@@ -286,6 +292,7 @@ export const hospitals: Hospital[] = [
   {
     slug: "blk-max-super-speciality-delhi",
     name: "BLK-Max Super Speciality Hospital",
+    image: "https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?auto=format&fit=crop&w=800&q=75",
     city: "Delhi",
     specialties: ["Oncology", "Transplant Surgery"],
     accreditations: ["Accreditation status — verify with hospital"],
@@ -295,6 +302,7 @@ export const hospitals: Hospital[] = [
   {
     slug: "continental-hospitals-hyderabad",
     name: "Continental Hospitals",
+    image: "https://images.unsplash.com/photo-1586773860383-dab5f3bc1bcc?auto=format&fit=crop&w=800&q=75",
     city: "Hyderabad",
     specialties: ["Oncology"],
     accreditations: ["NABH Accredited"],
@@ -304,6 +312,7 @@ export const hospitals: Hospital[] = [
   {
     slug: "kokilaben-dhirubhai-ambani-mumbai",
     name: "Kokilaben Dhirubhai Ambani Hospital",
+    image: "https://images.unsplash.com/photo-1533042789716-e9a9c97cf4ee?auto=format&fit=crop&w=800&q=75",
     city: "Mumbai",
     specialties: ["Oncology", "Cardiology"],
     accreditations: ["Accreditation status — verify with hospital"],
@@ -313,6 +322,7 @@ export const hospitals: Hospital[] = [
   {
     slug: "fortis-hospitals-bengaluru",
     name: "Fortis Hospitals",
+    image: "https://images.unsplash.com/photo-1597807037496-c56a1d8bc29a?auto=format&fit=crop&w=800&q=75",
     city: "Bengaluru",
     specialties: ["Orthopedics", "Cosmetic Surgery"],
     accreditations: ["Accreditation status — verify with hospital"],
@@ -322,6 +332,7 @@ export const hospitals: Hospital[] = [
   {
     slug: "care-hospitals-hyderabad",
     name: "CARE Hospitals",
+    image: "https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?auto=format&fit=crop&w=800&q=75",
     city: "Hyderabad",
     specialties: ["Orthopedics"],
     accreditations: ["Accreditation status — verify with hospital"],
@@ -331,6 +342,7 @@ export const hospitals: Hospital[] = [
   {
     slug: "aster-medcity-kochi",
     name: "Aster Medcity",
+    image: "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=800&q=75",
     city: "Kochi",
     specialties: ["Orthopedics", "Neurology", "Transplant Surgery", "Cardiology", "Oncology"],
     accreditations: ["JCI Accredited", "NABH Accredited"],
@@ -340,6 +352,7 @@ export const hospitals: Hospital[] = [
   {
     slug: "nova-ivi-fertility-bengaluru",
     name: "Nova IVI Fertility",
+    image: "https://images.unsplash.com/photo-1481026469463-66327c86e544?auto=format&fit=crop&w=800&q=75",
     city: "Bengaluru",
     specialties: ["IVF & Fertility"],
     accreditations: ["Accreditation status — verify with hospital"],
@@ -349,6 +362,7 @@ export const hospitals: Hospital[] = [
   {
     slug: "bloom-ivf-group-delhi",
     name: "Bloom IVF Group",
+    image: "https://images.unsplash.com/photo-1626315869436-d6781ba69d6e?auto=format&fit=crop&w=800&q=75",
     city: "Delhi",
     specialties: ["IVF & Fertility"],
     accreditations: ["Accreditation status — verify with hospital"],
@@ -358,6 +372,7 @@ export const hospitals: Hospital[] = [
   {
     slug: "art-fertility-clinics-gurugram",
     name: "ART Fertility Clinics",
+    image: "https://images.unsplash.com/photo-1490351267196-b7a67e26e41b?auto=format&fit=crop&w=800&q=75",
     city: "Gurugram",
     specialties: ["IVF & Fertility"],
     accreditations: ["NABH Accredited", "NABL Accredited", "RTAC Accredited"],
@@ -367,6 +382,7 @@ export const hospitals: Hospital[] = [
   {
     slug: "indira-ivf-delhi",
     name: "Indira IVF",
+    image: "https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?auto=format&fit=crop&w=800&q=75",
     city: "Delhi",
     specialties: ["IVF & Fertility"],
     accreditations: ["NABH Accredited"],
@@ -376,6 +392,7 @@ export const hospitals: Hospital[] = [
   {
     slug: "fms-dental-hyderabad",
     name: "FMS Dental Hospitals",
+    image: "https://images.unsplash.com/photo-1586773860383-dab5f3bc1bcc?auto=format&fit=crop&w=800&q=75",
     city: "Hyderabad",
     specialties: ["Dental Care"],
     accreditations: ["Accreditation status — verify with hospital"],
@@ -385,6 +402,7 @@ export const hospitals: Hospital[] = [
   {
     slug: "ganga-hospital-coimbatore",
     name: "Ganga Hospital",
+    image: "https://images.unsplash.com/photo-1533042789716-e9a9c97cf4ee?auto=format&fit=crop&w=800&q=75",
     city: "Coimbatore",
     specialties: ["Cosmetic Surgery"],
     accreditations: ["NABH Accredited"],
@@ -394,6 +412,7 @@ export const hospitals: Hospital[] = [
   {
     slug: "artemis-hospital-gurugram",
     name: "Artemis Hospital",
+    image: "https://images.unsplash.com/photo-1597807037496-c56a1d8bc29a?auto=format&fit=crop&w=800&q=75",
     city: "Gurugram",
     specialties: ["Cosmetic Surgery", "Cardiology"],
     accreditations: ["JCI Accredited"],
@@ -403,6 +422,7 @@ export const hospitals: Hospital[] = [
   {
     slug: "rajagiri-hospital-kochi",
     name: "Rajagiri Hospital",
+    image: "https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?auto=format&fit=crop&w=800&q=75",
     city: "Kochi",
     specialties: ["Neurology"],
     accreditations: ["Accreditation status — verify with hospital"],
@@ -412,6 +432,7 @@ export const hospitals: Hospital[] = [
   {
     slug: "gleneagles-global-hospitals-hyderabad",
     name: "Gleneagles Global Hospitals",
+    image: "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=800&q=75",
     city: "Hyderabad",
     specialties: ["Transplant Surgery"],
     accreditations: ["JCI Accredited"],
@@ -421,6 +442,7 @@ export const hospitals: Hospital[] = [
   {
     slug: "vps-lakeshore-hospital-kochi",
     name: "VPS Lakeshore Hospital",
+    image: "https://images.unsplash.com/photo-1481026469463-66327c86e544?auto=format&fit=crop&w=800&q=75",
     city: "Kochi",
     specialties: ["Transplant Surgery"],
     accreditations: ["Accreditation status — verify with hospital"],
@@ -430,6 +452,7 @@ export const hospitals: Hospital[] = [
   {
     slug: "marengo-asia-hospitals-faridabad",
     name: "Marengo Asia Hospitals",
+    image: "https://images.unsplash.com/photo-1626315869436-d6781ba69d6e?auto=format&fit=crop&w=800&q=75",
     city: "Faridabad",
     specialties: ["Cardiology", "Neurology", "Oncology", "Orthopedics", "Transplant Surgery"],
     accreditations: ["NABH Accredited", "NABL Accredited"],
@@ -439,6 +462,7 @@ export const hospitals: Hospital[] = [
   {
     slug: "fortis-hospital-noida",
     name: "Fortis Hospital, Noida",
+    image: "https://images.unsplash.com/photo-1490351267196-b7a67e26e41b?auto=format&fit=crop&w=800&q=75",
     city: "Noida",
     specialties: ["Cardiology", "Oncology", "Orthopedics", "Neurology", "Transplant Surgery", "Cosmetic Surgery", "IVF & Fertility"],
     accreditations: ["NABH Accredited"],
@@ -457,6 +481,7 @@ export type Doctor = {
   experience: string;
   qualifications?: string;
   languages: string[];
+  photo?: string;
 };
 
 export const doctors: Doctor[] = [
@@ -486,39 +511,39 @@ export const doctors: Doctor[] = [
   { slug: "dr-rakesh-rai-sapra", name: "Dr. Rakesh Rai Sapra", specialty: "Cardiology - Interventional & Electrophysiology", treatmentSlug: "cardiology", hospital: "Marengo Asia Hospitals, Faridabad", hospitalSlug: "marengo-asia-hospitals-faridabad", experience: "25+ years", qualifications: "MBBS, MD, DM (Cardiology, AIIMS New Delhi); Program Clinical Director - Cardiology", languages: ["English", "Hindi"] },
   { slug: "dr-hari-goyal", name: "Dr. Hari Goyal", specialty: "Medical Oncology", treatmentSlug: "oncology", hospital: "Artemis Hospital, Gurugram", hospitalSlug: "artemis-hospital-gurugram", experience: "Confirm with hospital", qualifications: "Confirm with hospital", languages: ["English", "Hindi"] },
   { slug: "dr-ips-oberoi", name: "Dr. I P S Oberoi", specialty: "Orthopaedics - Joint Replacement", treatmentSlug: "orthopedics", hospital: "Artemis Hospital, Delhi", hospitalSlug: "artemis-hospital-gurugram", experience: "Confirm with hospital", qualifications: "Confirm with hospital", languages: ["English", "Hindi"] },
-  { slug: "dr-rahul-gupta", name: "Dr. Rahul Gupta", specialty: "Neurosurgery", treatmentSlug: "neurology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "23+ years", qualifications: "MBBS (Govt. Medical College, Rohtak), MS (General Surgery, PGIMS Rohtak), M.Ch (Neurosurgery, PGIMER Chandigarh)", languages: ["English", "Hindi"] },
-  { slug: "dr-rajat-bajaj", name: "Dr. Rajat Bajaj", specialty: "Medical Oncology", treatmentSlug: "oncology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "10+ years", qualifications: "MBBS, MD (Internal Medicine, MAMC), DNB-SS (Medical Oncology, RGCI)", languages: ["English", "Hindi"] },
-  { slug: "dr-vikas-dua", name: "Dr. Vikas Dua", specialty: "Paediatric Haematology, Oncology & Bone Marrow Transplant", treatmentSlug: "transplants", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS, MD (Paediatrics, PGIMS Rohtak), FNB (Paediatric Hematology Oncology, Sir Ganga Ram Hospital)", languages: ["English", "Hindi"] },
-  { slug: "dr-vishal-bansal", name: "Dr. Vishal Bansal", specialty: "Surgical Oncology", treatmentSlug: "oncology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS (JIPMER Puducherry), MS (General Surgery, PGIMS Rohtak), MCh (Surgical Oncology, GCRI Ahmedabad)", languages: ["English", "Hindi"] },
-  { slug: "dr-vishvanathan-dudani", name: "Dr. Vishvanathan Dudani", specialty: "Plastic, Reconstructive & Cosmetic Surgery", treatmentSlug: "cosmetic", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "20+ years", qualifications: "MBBS, MS (General Surgery), M.Ch (Plastic Surgery)", languages: ["English", "Hindi"] },
-  { slug: "dr-vivek-vij", name: "Dr. Vivek Vij", specialty: "Liver Transplantation & GI Surgery", treatmentSlug: "transplants", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS (B.J. Medical College, Pune), MS (General Surgery), DNB, MRCS (Edinburgh)", languages: ["English", "Hindi"] },
-  { slug: "dr-rahul-bhargava", name: "Dr. Rahul Bhargava", specialty: "Haematology, Haemato-Oncology & Bone Marrow Transplant", treatmentSlug: "transplants", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS, MD (General Medicine, Gandhi Medical College Bhopal), DM (Haematology, AIIMS New Delhi)", languages: ["English", "Hindi"] },
-  { slug: "dr-ajay-kaul", name: "Dr. Ajay Kaul", specialty: "Cardiac Sciences (Cardiothoracic & Vascular Surgery)", treatmentSlug: "cardiology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "38+ years", qualifications: "MBBS, MS (General Surgery), M.Ch (Cardiothoracic & Vascular Surgery, Bombay University)", languages: ["English", "Hindi"] },
-  { slug: "dr-anita-malik", name: "Dr. Anita Malik", specialty: "Radiation Oncology", treatmentSlug: "oncology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS (Netaji Subhash Chandra Bose Medical College), MD (Radiotherapy, Govt. Medical College Indore)", languages: ["English", "Hindi"] },
-  { slug: "dr-anjana-singh", name: "Dr. Anjana Singh", specialty: "Obstetrics & Gynaecology - Infertility Treatment", treatmentSlug: "ivf", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "23 years", qualifications: "MBBS (Guru Nanak Dev University), DNB (National Board of Examinations)", languages: ["English", "Hindi"] },
-  { slug: "dr-anuja-porwal", name: "Dr. Anuja Porwal", specialty: "Nephrology - Kidney Transplant", treatmentSlug: "transplants", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS (B.R.D. Medical College Gorakhpur), DNB (Medicine), DNB (Nephrology)", languages: ["English", "Hindi"] },
-  { slug: "dr-arvind-jain", name: "Dr. Arvind Jain", specialty: "Plastic, Reconstructive & Cosmetic Surgery", treatmentSlug: "cosmetic", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS (MLB Medical College Jhansi), MS (King George Medical College Lucknow), M.Ch (Plastic Surgery, GMC Nagpur)", languages: ["English", "Hindi"] },
-  { slug: "dr-atul-mishra", name: "Dr. Atul Mishra", specialty: "Orthopaedics - Joint Replacement Surgery", treatmentSlug: "orthopedics", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "18+ years", qualifications: "MBBS (Rajasthan University), MS (Orthopaedics, Gujarat University), Fellowship in Joint Reconstruction (Chiba University, Japan)", languages: ["English", "Hindi"] },
+  { slug: "dr-rahul-gupta", name: "Dr. Rahul Gupta", specialty: "Neurosurgery", treatmentSlug: "neurology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "23+ years", qualifications: "MBBS (Govt. Medical College, Rohtak), MS (General Surgery, PGIMS Rohtak), M.Ch (Neurosurgery, PGIMER Chandigarh)", languages: ["English", "Hindi"], photo: "/doctors/dr-rahul-gupta.jpg" },
+  { slug: "dr-rajat-bajaj", name: "Dr. Rajat Bajaj", specialty: "Medical Oncology", treatmentSlug: "oncology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "10+ years", qualifications: "MBBS, MD (Internal Medicine, MAMC), DNB-SS (Medical Oncology, RGCI)", languages: ["English", "Hindi"], photo: "/doctors/dr-rajat-bajaj.jpg" },
+  { slug: "dr-vikas-dua", name: "Dr. Vikas Dua", specialty: "Paediatric Haematology, Oncology & Bone Marrow Transplant", treatmentSlug: "transplants", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS, MD (Paediatrics, PGIMS Rohtak), FNB (Paediatric Hematology Oncology, Sir Ganga Ram Hospital)", languages: ["English", "Hindi"], photo: "/doctors/dr-vikas-dua.jpg" },
+  { slug: "dr-vishal-bansal", name: "Dr. Vishal Bansal", specialty: "Surgical Oncology", treatmentSlug: "oncology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS (JIPMER Puducherry), MS (General Surgery, PGIMS Rohtak), MCh (Surgical Oncology, GCRI Ahmedabad)", languages: ["English", "Hindi"], photo: "/doctors/dr-vishal-bansal.jpg" },
+  { slug: "dr-vishvanathan-dudani", name: "Dr. Vishvanathan Dudani", specialty: "Plastic, Reconstructive & Cosmetic Surgery", treatmentSlug: "cosmetic", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "20+ years", qualifications: "MBBS, MS (General Surgery), M.Ch (Plastic Surgery)", languages: ["English", "Hindi"], photo: "/doctors/dr-vishvanathan-dudani.jpg" },
+  { slug: "dr-vivek-vij", name: "Dr. Vivek Vij", specialty: "Liver Transplantation & GI Surgery", treatmentSlug: "transplants", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS (B.J. Medical College, Pune), MS (General Surgery), DNB, MRCS (Edinburgh)", languages: ["English", "Hindi"], photo: "/doctors/dr-vivek-vij.jpg" },
+  { slug: "dr-rahul-bhargava", name: "Dr. Rahul Bhargava", specialty: "Haematology, Haemato-Oncology & Bone Marrow Transplant", treatmentSlug: "transplants", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS, MD (General Medicine, Gandhi Medical College Bhopal), DM (Haematology, AIIMS New Delhi)", languages: ["English", "Hindi"], photo: "/doctors/dr-rahul-bhargava.jpg" },
+  { slug: "dr-ajay-kaul", name: "Dr. Ajay Kaul", specialty: "Cardiac Sciences (Cardiothoracic & Vascular Surgery)", treatmentSlug: "cardiology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "38+ years", qualifications: "MBBS, MS (General Surgery), M.Ch (Cardiothoracic & Vascular Surgery, Bombay University)", languages: ["English", "Hindi"], photo: "/doctors/dr-ajay-kaul.jpg" },
+  { slug: "dr-anita-malik", name: "Dr. Anita Malik", specialty: "Radiation Oncology", treatmentSlug: "oncology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS (Netaji Subhash Chandra Bose Medical College), MD (Radiotherapy, Govt. Medical College Indore)", languages: ["English", "Hindi"], photo: "/doctors/dr-anita-malik.jpg" },
+  { slug: "dr-anjana-singh", name: "Dr. Anjana Singh", specialty: "Obstetrics & Gynaecology - Infertility Treatment", treatmentSlug: "ivf", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "23 years", qualifications: "MBBS (Guru Nanak Dev University), DNB (National Board of Examinations)", languages: ["English", "Hindi"], photo: "/doctors/dr-anjana-singh.jpg" },
+  { slug: "dr-anuja-porwal", name: "Dr. Anuja Porwal", specialty: "Nephrology - Kidney Transplant", treatmentSlug: "transplants", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS (B.R.D. Medical College Gorakhpur), DNB (Medicine), DNB (Nephrology)", languages: ["English", "Hindi"], photo: "/doctors/dr-anuja-porwal.jpg" },
+  { slug: "dr-arvind-jain", name: "Dr. Arvind Jain", specialty: "Plastic, Reconstructive & Cosmetic Surgery", treatmentSlug: "cosmetic", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS (MLB Medical College Jhansi), MS (King George Medical College Lucknow), M.Ch (Plastic Surgery, GMC Nagpur)", languages: ["English", "Hindi"], photo: "/doctors/dr-arvind-jain.jpg" },
+  { slug: "dr-atul-mishra", name: "Dr. Atul Mishra", specialty: "Orthopaedics - Joint Replacement Surgery", treatmentSlug: "orthopedics", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "18+ years", qualifications: "MBBS (Rajasthan University), MS (Orthopaedics, Gujarat University), Fellowship in Joint Reconstruction (Chiba University, Japan)", languages: ["English", "Hindi"], photo: "/doctors/dr-atul-mishra.jpg" },
   { slug: "dr-jalaj-baxi", name: "Dr Jalaj Baxi", specialty: "Surgical Oncology", treatmentSlug: "oncology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "25+ years", qualifications: "MBBS, MS (General Surgery, RNT Medical College Udaipur), DNB (Surgery), Fellowship in Surgical Oncology (GCRI)", languages: ["English", "Hindi"] },
-  { slug: "dr-jyoti-anand", name: "Dr. Jyoti Anand", specialty: "Medical Oncology", treatmentSlug: "oncology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "20+ years", qualifications: "MBBS (Sri Guru Ram Dass Institute of Medical Sciences), DNB (Internal Medicine), DNB (Medical Oncology)", languages: ["English", "Hindi"] },
-  { slug: "dr-jyoti-b-sharma", name: "Dr. Jyoti B. Sharma", specialty: "Neurology", treatmentSlug: "neurology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS, DM (Neurology, GB Pant Hospital / GIPMER New Delhi)", languages: ["English", "Hindi"] },
-  { slug: "dr-kabir-rehmani", name: "Dr. Kabir Rehmani", specialty: "Surgical Oncology", treatmentSlug: "oncology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "22 years", qualifications: "MBBS (Jabalpur), MS (General Surgery, Mumbai University), Fellowship Head & Neck Surgical Oncology (Tata Memorial Hospital); Member, Royal College of Surgeons Edinburgh", languages: ["English", "Hindi"] },
-  { slug: "dr-mukul-rastogi", name: "Dr. Mukul Rastogi", specialty: "Hepatology, Gastroenterology & Liver Transplant", treatmentSlug: "transplants", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS, MD (General Medicine), DNB (Medicine), DM (Gastroenterology) - SMS Medical College, Jaipur", languages: ["English", "Hindi"] },
-  { slug: "dr-piyush-varshney", name: "Dr. Piyush Varshney", specialty: "Urology & Kidney Transplant", treatmentSlug: "transplants", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "20 years", qualifications: "MBBS (JNMC, AMU Aligarh), MS (General Surgery), M.Ch (Urology, Sion Hospital Mumbai, Gold Medal)", languages: ["English", "Hindi"] },
-  { slug: "dr-shailendra-kumar-goel", name: "Dr. Shailendra Kumar Goel", specialty: "Urology & Kidney Transplant", treatmentSlug: "transplants", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "26+ years", qualifications: "MBBS (S.N. Medical College, Agra), MS (General Surgery, UCMS & GTB Hospital Delhi), DNB (Genito-Urinary Surgery), M.Ch (Urology, SGPGIMS Lucknow)", languages: ["English", "Hindi"] },
-  { slug: "dr-neetu-sharma", name: "Dr. Neetu Sharma", specialty: "Ophthalmology - Cataract & Glaucoma Surgery", treatmentSlug: "ophthalmology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "25+ years", qualifications: "M.B.B.S (University of Madras, JIPMER Pondicherry), M.S (Ophthalmology, Gold Medalist), Fellowship in Cataract Surgery (L.V. Prasad Eye Institute, Hyderabad)", languages: ["English", "Hindi"] },
-  { slug: "dr-savyasachi-saxena", name: "Dr. Savyasachi Saxena", specialty: "ENT - Ear, Nose, Throat & Head-Neck Surgery", treatmentSlug: "ent", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "18 years", qualifications: "M.B.B.S (Ganesh Shankar Vidyarthi Memorial Medical College, Kanpur), MS (ENT, Moti Lal Nehru Medical College, Allahabad)", languages: ["English", "Hindi"] },
-  { slug: "dr-vs-chauhan", name: "Dr. V.S Chauhan", specialty: "Minimally Invasive, GI & Advanced Laparoscopic Surgery", treatmentSlug: "gi-bariatric-surgery", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "20+ years", qualifications: "MBBS, MS (Surgery, Banaras Hindu University), Fellow of American College of Surgeons (FACS), Fellow Royal College of Surgeons and Physicians of Glasgow (FRCS)", languages: ["English", "Hindi"] },
-  { slug: "dr-bimlesh-dhar-pandey", name: "Dr. Bimlesh Dhar Pandey", specialty: "Rheumatology", treatmentSlug: "rheumatology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS (Calicut University, Kerala), MD (Internal Medicine, RIMS Ranchi), Fellowship in Rheumatology (University of Leeds, UK)", languages: ["English", "Hindi"] },
-  { slug: "dr-ajay-aggarwal", name: "Dr. Ajay Aggarwal", specialty: "Internal Medicine", treatmentSlug: "internal-medicine", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "M.B.B.S, M.D, Fellowship in Infectious Diseases", languages: ["English", "Hindi"] },
-  { slug: "dr-vijay-kumar-sinha", name: "Dr. Vijay Kumar Sinha", specialty: "Nephrology & Kidney Transplant", treatmentSlug: "transplants", hospital: "Max Super Speciality Hospital, Noida", hospitalSlug: "max-super-speciality-noida", experience: "Confirm with hospital", qualifications: "MBBS (Calcutta University), MD (Medicine, Patna University), DNB (Nephrology, Indraprastha Apollo Hospital)", languages: ["English", "Hindi"] },
-  { slug: "dr-anil-prasad-bhatt", name: "Dr. Anil Prasad Bhatt", specialty: "Nephrology & Kidney Transplant", treatmentSlug: "transplants", hospital: "Max Super Speciality Hospital, Noida", hospitalSlug: "max-super-speciality-noida", experience: "Confirm with hospital", qualifications: "MBBS, MD (General Medicine, GSVM Medical College Kanpur), DM (Nephrology, AIIMS New Delhi)", languages: ["English", "Hindi"] },
+  { slug: "dr-jyoti-anand", name: "Dr. Jyoti Anand", specialty: "Medical Oncology", treatmentSlug: "oncology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "20+ years", qualifications: "MBBS (Sri Guru Ram Dass Institute of Medical Sciences), DNB (Internal Medicine), DNB (Medical Oncology)", languages: ["English", "Hindi"], photo: "/doctors/dr-jyoti-anand.jpg" },
+  { slug: "dr-jyoti-b-sharma", name: "Dr. Jyoti B. Sharma", specialty: "Neurology", treatmentSlug: "neurology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS, DM (Neurology, GB Pant Hospital / GIPMER New Delhi)", languages: ["English", "Hindi"], photo: "/doctors/dr-jyoti-b-sharma.jpg" },
+  { slug: "dr-kabir-rehmani", name: "Dr. Kabir Rehmani", specialty: "Surgical Oncology", treatmentSlug: "oncology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "22 years", qualifications: "MBBS (Jabalpur), MS (General Surgery, Mumbai University), Fellowship Head & Neck Surgical Oncology (Tata Memorial Hospital); Member, Royal College of Surgeons Edinburgh", languages: ["English", "Hindi"], photo: "/doctors/dr-kabir-rehmani.jpg" },
+  { slug: "dr-mukul-rastogi", name: "Dr. Mukul Rastogi", specialty: "Hepatology, Gastroenterology & Liver Transplant", treatmentSlug: "transplants", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS, MD (General Medicine), DNB (Medicine), DM (Gastroenterology) - SMS Medical College, Jaipur", languages: ["English", "Hindi"], photo: "/doctors/dr-mukul-rastogi.jpg" },
+  { slug: "dr-piyush-varshney", name: "Dr. Piyush Varshney", specialty: "Urology & Kidney Transplant", treatmentSlug: "transplants", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "20 years", qualifications: "MBBS (JNMC, AMU Aligarh), MS (General Surgery), M.Ch (Urology, Sion Hospital Mumbai, Gold Medal)", languages: ["English", "Hindi"], photo: "/doctors/dr-piyush-varshney.jpg" },
+  { slug: "dr-shailendra-kumar-goel", name: "Dr. Shailendra Kumar Goel", specialty: "Urology & Kidney Transplant", treatmentSlug: "transplants", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "26+ years", qualifications: "MBBS (S.N. Medical College, Agra), MS (General Surgery, UCMS & GTB Hospital Delhi), DNB (Genito-Urinary Surgery), M.Ch (Urology, SGPGIMS Lucknow)", languages: ["English", "Hindi"], photo: "/doctors/dr-shailendra-kumar-goel.jpg" },
+  { slug: "dr-neetu-sharma", name: "Dr. Neetu Sharma", specialty: "Ophthalmology - Cataract & Glaucoma Surgery", treatmentSlug: "ophthalmology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "25+ years", qualifications: "M.B.B.S (University of Madras, JIPMER Pondicherry), M.S (Ophthalmology, Gold Medalist), Fellowship in Cataract Surgery (L.V. Prasad Eye Institute, Hyderabad)", languages: ["English", "Hindi"], photo: "/doctors/dr-neetu-sharma.jpg" },
+  { slug: "dr-savyasachi-saxena", name: "Dr. Savyasachi Saxena", specialty: "ENT - Ear, Nose, Throat & Head-Neck Surgery", treatmentSlug: "ent", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "18 years", qualifications: "M.B.B.S (Ganesh Shankar Vidyarthi Memorial Medical College, Kanpur), MS (ENT, Moti Lal Nehru Medical College, Allahabad)", languages: ["English", "Hindi"], photo: "/doctors/dr-savyasachi-saxena.jpg" },
+  { slug: "dr-vs-chauhan", name: "Dr. V.S Chauhan", specialty: "Minimally Invasive, GI & Advanced Laparoscopic Surgery", treatmentSlug: "gi-bariatric-surgery", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "20+ years", qualifications: "MBBS, MS (Surgery, Banaras Hindu University), Fellow of American College of Surgeons (FACS), Fellow Royal College of Surgeons and Physicians of Glasgow (FRCS)", languages: ["English", "Hindi"], photo: "/doctors/dr-vs-chauhan.jpg" },
+  { slug: "dr-bimlesh-dhar-pandey", name: "Dr. Bimlesh Dhar Pandey", specialty: "Rheumatology", treatmentSlug: "rheumatology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS (Calicut University, Kerala), MD (Internal Medicine, RIMS Ranchi), Fellowship in Rheumatology (University of Leeds, UK)", languages: ["English", "Hindi"], photo: "/doctors/dr-bimlesh-dhar-pandey.jpg" },
+  { slug: "dr-ajay-aggarwal", name: "Dr. Ajay Aggarwal", specialty: "Internal Medicine", treatmentSlug: "internal-medicine", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "M.B.B.S, M.D, Fellowship in Infectious Diseases", languages: ["English", "Hindi"], photo: "/doctors/dr-ajay-aggarwal.jpg" },
+  { slug: "dr-vijay-kumar-sinha", name: "Dr. Vijay Kumar Sinha", specialty: "Nephrology & Kidney Transplant", treatmentSlug: "transplants", hospital: "Max Super Speciality Hospital, Noida", hospitalSlug: "max-super-speciality-noida", experience: "Confirm with hospital", qualifications: "MBBS (Calcutta University), MD (Medicine, Patna University), DNB (Nephrology, Indraprastha Apollo Hospital)", languages: ["English", "Hindi"], photo: "/doctors/dr-vijay-kumar-sinha.jpg" },
+  { slug: "dr-anil-prasad-bhatt", name: "Dr. Anil Prasad Bhatt", specialty: "Nephrology & Kidney Transplant", treatmentSlug: "transplants", hospital: "Max Super Speciality Hospital, Noida", hospitalSlug: "max-super-speciality-noida", experience: "Confirm with hospital", qualifications: "MBBS, MD (General Medicine, GSVM Medical College Kanpur), DM (Nephrology, AIIMS New Delhi)", languages: ["English", "Hindi"], photo: "/doctors/dr-anil-prasad-bhatt.jpg" },
   { slug: "dr-sm-shuaib-zaidi", name: "Dr S. M. Shuaib Zaidi", specialty: "Surgical Oncology", treatmentSlug: "oncology", hospital: "Max Super Speciality Hospital, Noida", hospitalSlug: "max-super-speciality-noida", experience: "Confirm with hospital", qualifications: "MBBS (Maulana Azad Medical College), MS (Surgery, Safdarjung Hospital), DNB (Surgery), MCh (Surgical Oncology, Cancer Institute WIA Chennai)", languages: ["English", "Hindi"] },
   { slug: "dr-sujeet-narain", name: "Dr Sujeet Narain", specialty: "Interventional Cardiology", treatmentSlug: "cardiology", hospital: "Max Super Speciality Hospital, Noida", hospitalSlug: "max-super-speciality-noida", experience: "Confirm with hospital", qualifications: "MBBS (Patliputra Medical College, Dhanbad), MD (Medicine, Rajendra Institute of Medical Sciences, Ranchi), DNB (Cardiology, Fortis Escorts Heart Institute)", languages: ["English", "Hindi"] },
-  { slug: "dr-krishnanu-dutta-choudhury", name: "Dr. Krishnanu Dutta Choudhury", specialty: "Cardiac Surgery", treatmentSlug: "cardiology", hospital: "Max Super Speciality Hospital, Noida", hospitalSlug: "max-super-speciality-noida", experience: "Confirm with hospital", qualifications: "MBBS (Silchar Medical College), MS (General Surgery, Gauhati Medical College), M.Ch (Cardio Thoracic Vascular Surgery, PGIMER and Dr. RML Hospital)", languages: ["English", "Hindi"] },
-  { slug: "dr-manoj-luthra", name: "Dr. Manoj Luthra", specialty: "Cardiac Surgery", treatmentSlug: "cardiology", hospital: "Max Super Speciality Hospital, Noida", hospitalSlug: "max-super-speciality-noida", experience: "Confirm with hospital", qualifications: "MBBS, MS (General Surgery), DNB (General Surgery), M.Ch (Cardiac Surgery, Armed Forces Medical College Pune); performed the first heart transplant in the Indian Army (2007)", languages: ["English", "Hindi"] },
-  { slug: "dr-kr-vasudevan", name: "Dr. K R Vasudevan", specialty: "Liver Transplant & Surgical Gastroenterology", treatmentSlug: "transplants", hospital: "Max Super Speciality Hospital, Noida", hospitalSlug: "max-super-speciality-noida", experience: "Confirm with hospital", qualifications: "MBBS, MS (General Surgery, Goa Medical College), DNB (Surgical Gastroenterology, Sir Ganga Ram Hospital)", languages: ["English", "Hindi"] },
-  { slug: "dr-atul-sharma-oncology", name: "Dr. Atul Sharma", specialty: "Medical Oncology", treatmentSlug: "oncology", hospital: "Max Super Speciality Hospital, Noida", hospitalSlug: "max-super-speciality-noida", experience: "Confirm with hospital", qualifications: "MBBS, MD (Internal Medicine, Govt. Medical College Jammu), DM (Medical Oncology, AIIMS New Delhi), MRCP, MNAMS", languages: ["English", "Hindi"] },
+  { slug: "dr-krishnanu-dutta-choudhury", name: "Dr. Krishnanu Dutta Choudhury", specialty: "Cardiac Surgery", treatmentSlug: "cardiology", hospital: "Max Super Speciality Hospital, Noida", hospitalSlug: "max-super-speciality-noida", experience: "Confirm with hospital", qualifications: "MBBS (Silchar Medical College), MS (General Surgery, Gauhati Medical College), M.Ch (Cardio Thoracic Vascular Surgery, PGIMER and Dr. RML Hospital)", languages: ["English", "Hindi"], photo: "/doctors/dr-krishnanu-dutta-choudhury.jpg" },
+  { slug: "dr-manoj-luthra", name: "Dr. Manoj Luthra", specialty: "Cardiac Surgery", treatmentSlug: "cardiology", hospital: "Max Super Speciality Hospital, Noida", hospitalSlug: "max-super-speciality-noida", experience: "Confirm with hospital", qualifications: "MBBS, MS (General Surgery), DNB (General Surgery), M.Ch (Cardiac Surgery, Armed Forces Medical College Pune); performed the first heart transplant in the Indian Army (2007)", languages: ["English", "Hindi"], photo: "/doctors/dr-manoj-luthra.jpg" },
+  { slug: "dr-kr-vasudevan", name: "Dr. K R Vasudevan", specialty: "Liver Transplant & Surgical Gastroenterology", treatmentSlug: "transplants", hospital: "Max Super Speciality Hospital, Noida", hospitalSlug: "max-super-speciality-noida", experience: "Confirm with hospital", qualifications: "MBBS, MS (General Surgery, Goa Medical College), DNB (Surgical Gastroenterology, Sir Ganga Ram Hospital)", languages: ["English", "Hindi"], photo: "/doctors/dr-kr-vasudevan.jpg" },
+  { slug: "dr-atul-sharma-oncology", name: "Dr. Atul Sharma", specialty: "Medical Oncology", treatmentSlug: "oncology", hospital: "Max Super Speciality Hospital, Noida", hospitalSlug: "max-super-speciality-noida", experience: "Confirm with hospital", qualifications: "MBBS, MD (Internal Medicine, Govt. Medical College Jammu), DM (Medical Oncology, AIIMS New Delhi), MRCP, MNAMS", languages: ["English", "Hindi"], photo: "/doctors/dr-atul-sharma-oncology.jpg" },
 ];
 
 export const journeySteps = [
