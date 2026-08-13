@@ -21,11 +21,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/blog",
     "/bd/knee-replacement-india",
     "/bd/knee-replacement-india/bn",
+    "/bd/cardiac-treatment-india",
   ].map((path) => ({
     url: `${BASE_URL}${path}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
-    priority: path === "" ? 1 : path.startsWith("/bd/knee-replacement-india") ? 0.9 : 0.6,
+    priority: path === "" ? 1 : path.startsWith("/bd/knee-replacement-india") || path.startsWith("/bd/cardiac-treatment-india") ? 0.9 : 0.6,
   }));
 
   const treatmentRoutes = treatments.map((t) => ({
