@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import Button from "@/components/Button";
 
@@ -80,8 +81,20 @@ export default function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="flex flex-col items-center rounded-2xl border border-teal-200 bg-teal-50 p-10 text-center dark:border-teal-500/20 dark:bg-teal-500/10">
-        <CheckCircle2 size={40} className="text-teal-600 dark:text-teal-300" />
+      <motion.div
+        key="success"
+        initial={{ opacity: 0, scale: 0.96 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        className="flex flex-col items-center rounded-2xl border border-teal-200 bg-teal-50 p-10 text-center dark:border-teal-500/20 dark:bg-teal-500/10"
+      >
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.1, type: "spring", stiffness: 300, damping: 15 }}
+        >
+          <CheckCircle2 size={40} className="text-teal-600 dark:text-teal-300" />
+        </motion.div>
         <h3 className="mt-4 font-display text-lg font-semibold text-navy-500 dark:text-white">
           Thank you — we've received your message
         </h3>
@@ -92,12 +105,20 @@ export default function ContactForm() {
         <Button className="mt-6" onClick={() => setStatus("idle")}>
           Send another message
         </Button>
-      </div>
+      </motion.div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+    <motion.form
+      key="form"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      onSubmit={handleSubmit}
+      className="space-y-5"
+      noValidate
+    >
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Full name" error={errors.name}>
           <input
@@ -177,7 +198,7 @@ export default function ContactForm() {
         Your information is used only to coordinate your care and is never shared with third
         parties for marketing purposes.
       </p>
-    </form>
+    </motion.form>
   );
 }
 

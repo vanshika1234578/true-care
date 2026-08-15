@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Section from "@/components/Section";
 import TreatmentCard from "@/components/TreatmentCard";
+import { AnimatedStagger, AnimatedStaggerItem } from "@/components/AnimatedStagger";
 import { treatments } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -15,11 +16,13 @@ export default function TreatmentsPage() {
       title="Find the right specialist care"
       description="Each treatment includes an overview, common symptoms, treatment options, recovery expectations, and estimated stay — so you know what to expect before you decide."
     >
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <AnimatedStagger className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {treatments.map((t) => (
-          <TreatmentCard key={t.slug} treatment={t} />
+          <AnimatedStaggerItem key={t.slug}>
+            <TreatmentCard treatment={t} />
+          </AnimatedStaggerItem>
         ))}
-      </div>
+      </AnimatedStagger>
     </Section>
   );
 }

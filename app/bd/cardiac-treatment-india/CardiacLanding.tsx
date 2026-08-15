@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import FadeInImage from "@/components/FadeInImage";
 import {
   MessageCircle,
   CheckCircle2,
@@ -28,6 +28,8 @@ import { doctors, hospitals } from "@/lib/data";
 import { content } from "./content";
 import LeadModal from "./LeadModal";
 import ReportForm from "./ReportForm";
+import HeroGlow from "@/components/HeroGlow";
+import { AnimatedStagger, AnimatedStaggerItem } from "@/components/AnimatedStagger";
 
 const WHATSAPP_NUMBER = "919720574548";
 const LEAD_MODAL_SESSION_KEY = "truecare_cardiac_lead_modal_dismissed";
@@ -119,6 +121,7 @@ export default function CardiacLanding() {
 
       {/* Hero */}
       <section className="relative overflow-hidden bg-hero-gradient py-16 dark:bg-hero-gradient-dark sm:py-24">
+        <HeroGlow />
         <Container>
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="text-balance font-display text-3xl font-bold text-navy-500 dark:text-white sm:text-5xl">
@@ -228,11 +231,11 @@ export default function CardiacLanding() {
           <p className="mx-auto mb-10 max-w-xl text-center text-sm text-navy-300 dark:text-white/60">
             {t.categories.note}
           </p>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <AnimatedStagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {t.categories.items.map((item, i) => {
               const Icon = categoryIcons[i % categoryIcons.length];
               return (
-                <div
+                <AnimatedStaggerItem
                   key={item.title}
                   className="rounded-2xl border border-navy-100/70 bg-white p-5 shadow-card dark:border-white/10 dark:bg-white/5"
                 >
@@ -241,10 +244,10 @@ export default function CardiacLanding() {
                     {item.title}
                   </h3>
                   <p className="mt-1.5 text-xs text-navy-300 dark:text-white/60">{item.desc}</p>
-                </div>
+                </AnimatedStaggerItem>
               );
             })}
-          </div>
+          </AnimatedStagger>
         </Container>
       </section>
 
@@ -258,7 +261,7 @@ export default function CardiacLanding() {
             <p className="mx-auto mb-10 max-w-xl text-center text-sm text-navy-300 dark:text-white/60">
               {t.doctorsSection.subtitle}
             </p>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <AnimatedStagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {featuredDoctors.map((doctor) => {
                 const initials = doctor.name
                   .replace("Dr. ", "")
@@ -266,13 +269,13 @@ export default function CardiacLanding() {
                   .map((n) => n.charAt(0))
                   .join("");
                 return (
-                  <div
+                  <AnimatedStaggerItem
                     key={doctor.slug}
                     className="flex flex-col items-center rounded-2xl border border-navy-100/70 bg-white p-6 text-center shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-glow dark:border-white/10 dark:bg-white/5"
                   >
                     {doctor.photo ? (
                       <div className="relative h-16 w-16 overflow-hidden rounded-full">
-                        <Image src={doctor.photo} alt={doctor.name} fill className="object-cover" sizes="64px" />
+                        <FadeInImage src={doctor.photo} alt={doctor.name} fill className="object-cover" sizes="64px" />
                       </div>
                     ) : (
                       <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-teal-400 font-display text-base font-bold text-white">
@@ -295,10 +298,10 @@ export default function CardiacLanding() {
                     {doctor.experience !== "Confirm with hospital" && (
                       <p className="mt-1 text-[11px] text-navy-300 dark:text-white/40">{doctor.experience}</p>
                     )}
-                  </div>
+                  </AnimatedStaggerItem>
                 );
               })}
-            </div>
+            </AnimatedStagger>
             <div className="mt-8 text-center">
               <Button href="#report-form" onClick={() => track("doctor_profile_view")}>
                 {t.doctorsSection.cta}
@@ -315,15 +318,15 @@ export default function CardiacLanding() {
             <h2 className="mb-10 text-center font-display text-2xl font-bold text-navy-500 dark:text-white sm:text-3xl">
               {t.hospitalsSection.title}
             </h2>
-            <div className="grid gap-6 sm:grid-cols-2">
+            <AnimatedStagger className="grid gap-6 sm:grid-cols-2">
               {featuredHospitals.map((hospital) => (
-                <div
+                <AnimatedStaggerItem
                   key={hospital.slug}
                   className="overflow-hidden rounded-2xl border border-navy-100/70 bg-white shadow-card dark:border-white/10 dark:bg-white/5"
                 >
                   {hospital.image && (
                     <div className="relative h-36 w-full">
-                      <Image
+                      <FadeInImage
                         src={hospital.image}
                         alt={hospital.name}
                         fill
@@ -363,9 +366,9 @@ export default function CardiacLanding() {
                       {t.hospitalsSection.infoLabel} →
                     </Link>
                   </div>
-                </div>
+                </AnimatedStaggerItem>
               ))}
-            </div>
+            </AnimatedStagger>
           </Container>
         </section>
       )}

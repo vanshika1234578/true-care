@@ -9,6 +9,8 @@ import TestimonialCard from "@/components/TestimonialCard";
 import StatCounter from "@/components/StatCounter";
 import FAQAccordion from "@/components/FAQAccordion";
 import AnimatedSection from "@/components/AnimatedSection";
+import { AnimatedStagger, AnimatedStaggerItem } from "@/components/AnimatedStagger";
+import HeroGlow from "@/components/HeroGlow";
 import TopDestinations from "@/components/TopDestinations";
 import {
   treatments,
@@ -24,6 +26,7 @@ export default function HomePage() {
     <>
       {/* HERO */}
       <section className="relative overflow-hidden bg-hero-gradient dark:bg-hero-gradient-dark">
+        <HeroGlow />
         <Container className="relative flex flex-col items-center pt-20 pb-24 text-center sm:pt-28 sm:pb-32">
           <AnimatedSection>
             <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary-200 bg-primary-50 px-4 py-1.5 text-xs font-semibold text-primary-600 dark:border-primary-500/30 dark:bg-primary-500/10 dark:text-primary-300">
@@ -86,11 +89,13 @@ export default function HomePage() {
         title="Specialist care, across every major discipline"
         description="Each treatment page outlines what to expect — overview, options, recovery, and estimated stay."
       >
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <AnimatedStagger className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {treatments.map((t) => (
-            <TreatmentCard key={t.slug} treatment={t} />
+            <AnimatedStaggerItem key={t.slug}>
+              <TreatmentCard treatment={t} />
+            </AnimatedStaggerItem>
           ))}
-        </div>
+        </AnimatedStagger>
       </Section>
 
       {/* FIND A DOCTOR TEASER */}
@@ -135,11 +140,13 @@ export default function HomePage() {
         eyebrow="Patient Stories"
         title="What patients tell us after treatment"
       >
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+        <AnimatedStagger className="grid grid-cols-1 gap-6 sm:grid-cols-3">
           {testimonials.map((t) => (
-            <TestimonialCard key={t.name} {...t} />
+            <AnimatedStaggerItem key={t.name}>
+              <TestimonialCard {...t} />
+            </AnimatedStaggerItem>
           ))}
-        </div>
+        </AnimatedStagger>
         <div className="mt-10 text-center">
           <Button href="/patient-stories" variant="ghost" icon={<ArrowRight size={16} />}>
             Read more patient stories

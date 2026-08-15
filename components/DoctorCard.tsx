@@ -1,5 +1,8 @@
-import Image from "next/image";
+"use client";
+
+import { motion } from "framer-motion";
 import { Briefcase, Languages, Stethoscope } from "lucide-react";
+import FadeInImage from "./FadeInImage";
 import type { Doctor } from "@/lib/data";
 
 export default function DoctorCard({ doctor }: { doctor: Doctor }) {
@@ -10,10 +13,14 @@ export default function DoctorCard({ doctor }: { doctor: Doctor }) {
     .join("");
 
   return (
-    <div className="flex flex-col items-center rounded-2xl border border-navy-100/70 bg-white p-6 text-center shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-glow dark:border-white/10 dark:bg-white/5">
+    <motion.div
+      whileHover={{ y: -4 }}
+      transition={{ type: "spring", stiffness: 300, damping: 22 }}
+      className="flex flex-col items-center rounded-2xl border border-navy-100/70 bg-white p-6 text-center shadow-card transition-shadow duration-300 hover:shadow-glow dark:border-white/10 dark:bg-white/5"
+    >
       {doctor.photo ? (
         <div className="relative h-16 w-16 overflow-hidden rounded-full">
-          <Image src={doctor.photo} alt={doctor.name} fill className="object-cover" sizes="64px" />
+          <FadeInImage src={doctor.photo} alt={doctor.name} fill className="object-cover" sizes="64px" />
         </div>
       ) : (
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-teal-400 font-display text-lg font-bold text-white">
@@ -39,6 +46,6 @@ export default function DoctorCard({ doctor }: { doctor: Doctor }) {
           <Languages size={13} /> {doctor.languages.join(", ")}
         </span>
       </div>
-    </div>
+    </motion.div>
   );
 }

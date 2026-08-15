@@ -1,21 +1,28 @@
+"use client";
+
 import Link from "next/link";
-import Image from "next/image";
+import { motion } from "framer-motion";
 import { MapPin, BadgeCheck } from "lucide-react";
+import FadeInImage from "./FadeInImage";
 import type { Hospital } from "@/lib/data";
+
+const MotionLink = motion(Link);
 
 export default function HospitalCard({ hospital }: { hospital: Hospital }) {
   return (
-    <Link
+    <MotionLink
       href={`/hospitals/${hospital.slug}`}
-      className="flex flex-col overflow-hidden rounded-2xl border border-navy-100/70 bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-glow dark:border-white/10 dark:bg-white/5"
+      whileHover={{ y: -4 }}
+      transition={{ type: "spring", stiffness: 300, damping: 22 }}
+      className="group flex flex-col overflow-hidden rounded-2xl border border-navy-100/70 bg-white shadow-card transition-shadow duration-300 hover:shadow-glow dark:border-white/10 dark:bg-white/5"
     >
       {hospital.image && (
-        <div className="relative h-40 w-full">
-          <Image
+        <div className="relative h-40 w-full overflow-hidden">
+          <FadeInImage
             src={hospital.image}
             alt={hospital.name}
             fill
-            className="object-cover"
+            className="object-cover group-hover:scale-110"
             sizes="(max-width: 768px) 100vw, 400px"
           />
         </div>
@@ -54,6 +61,6 @@ export default function HospitalCard({ hospital }: { hospital: Hospital }) {
           ))}
         </div>
       </div>
-    </Link>
+    </MotionLink>
   );
 }

@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { ReactNode } from "react";
 
 type ButtonProps = {
@@ -13,21 +16,21 @@ type ButtonProps = {
 };
 
 const base =
-  "inline-flex items-center justify-center gap-2 font-display font-semibold transition-all duration-300 rounded-full whitespace-nowrap";
+  "inline-flex items-center justify-center gap-2 font-display font-semibold transition-colors duration-300 rounded-full whitespace-nowrap";
 
 const variants: Record<string, string> = {
-  primary:
-    "bg-primary-500 text-white shadow-glow hover:bg-primary-600 hover:-translate-y-0.5 active:translate-y-0",
+  primary: "bg-primary-500 text-white shadow-glow hover:bg-primary-600",
   secondary:
-    "bg-white text-navy-500 border border-navy-100 hover:border-primary-300 hover:-translate-y-0.5 dark:bg-surface-darkSoft dark:text-white dark:border-white/10",
-  ghost:
-    "bg-transparent text-primary-600 hover:bg-primary-50 dark:text-primary-300 dark:hover:bg-white/5",
+    "bg-white text-navy-500 border border-navy-100 hover:border-primary-300 dark:bg-surface-darkSoft dark:text-white dark:border-white/10",
+  ghost: "bg-transparent text-primary-600 hover:bg-primary-50 dark:text-primary-300 dark:hover:bg-white/5",
 };
 
 const sizes: Record<string, string> = {
   md: "px-5 py-2.5 text-sm",
   lg: "px-7 py-3.5 text-base",
 };
+
+const MotionLink = motion(Link);
 
 export default function Button({
   href,
@@ -40,20 +43,25 @@ export default function Button({
   icon,
 }: ButtonProps) {
   const classes = `${base} ${variants[variant]} ${sizes[size]} ${className}`;
+  const motionProps = {
+    whileHover: { y: -2 },
+    whileTap: { scale: 0.97, y: 0 },
+    transition: { type: "spring" as const, stiffness: 400, damping: 20 },
+  };
 
   if (href) {
     return (
-      <Link href={href} className={classes} onClick={onClick}>
+      <MotionLink href={href} className={classes} onClick={onClick} {...motionProps}>
         {children}
         {icon}
-      </Link>
+      </MotionLink>
     );
   }
 
   return (
-    <button type={type} onClick={onClick} className={classes}>
+    <motion.button type={type} onClick={onClick} className={classes} {...motionProps}>
       {children}
       {icon}
-    </button>
+    </motion.button>
   );
 }

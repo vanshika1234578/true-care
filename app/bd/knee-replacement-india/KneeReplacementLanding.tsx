@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import FadeInImage from "@/components/FadeInImage";
 import {
   MessageCircle,
   CheckCircle2,
@@ -25,6 +25,7 @@ import { content, type Lang } from "./content";
 import ReportForm from "./ReportForm";
 import LeadModal from "./LeadModal";
 import TestimonialCard from "@/components/TestimonialCard";
+import HeroGlow from "@/components/HeroGlow";
 
 const WHATSAPP_NUMBER = "919720574548";
 const LEAD_MODAL_SESSION_KEY = "truecare_bd_knee_lead_modal_dismissed";
@@ -129,6 +130,7 @@ export default function KneeReplacementLanding({ initialLang = "en" }: { initial
 
       {/* Hero */}
       <section className="relative overflow-hidden bg-hero-gradient py-16 dark:bg-hero-gradient-dark sm:py-24">
+        <HeroGlow />
         <Container>
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="text-balance font-display text-3xl font-bold text-navy-500 dark:text-white sm:text-5xl">
@@ -243,7 +245,7 @@ export default function KneeReplacementLanding({ initialLang = "en" }: { initial
             <div className="mx-auto max-w-2xl rounded-2xl border border-navy-100/70 bg-white p-8 text-center shadow-card dark:border-white/10 dark:bg-white/5">
               {doctor.photo ? (
                 <div className="relative mx-auto h-20 w-20 overflow-hidden rounded-full">
-                  <Image src={doctor.photo} alt={doctor.name} fill className="object-cover" sizes="80px" />
+                  <FadeInImage src={doctor.photo} alt={doctor.name} fill className="object-cover" sizes="80px" />
                 </div>
               ) : (
                 <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-teal-400 font-display text-lg font-bold text-white">
@@ -302,7 +304,7 @@ export default function KneeReplacementLanding({ initialLang = "en" }: { initial
             <div className="mx-auto max-w-2xl overflow-hidden rounded-2xl border border-navy-100/70 bg-white shadow-card dark:border-white/10 dark:bg-white/5">
               {hospital.image && (
                 <div className="relative h-44 w-full">
-                  <Image src={hospital.image} alt={hospital.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 700px" />
+                  <FadeInImage src={hospital.image} alt={hospital.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 700px" />
                 </div>
               )}
               <div className="p-8">

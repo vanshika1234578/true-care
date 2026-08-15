@@ -1,8 +1,10 @@
 "use client";
 
 import { useRef, useState, FormEvent } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Paperclip, Send, Loader2, X, FileText, AlertCircle, ShieldAlert } from "lucide-react";
 import DoctorCard from "@/components/DoctorCard";
+import { AnimatedStagger, AnimatedStaggerItem } from "@/components/AnimatedStagger";
 import type { Doctor } from "@/lib/data";
 
 type Message = {
@@ -113,7 +115,13 @@ export default function DoctorFinderChat() {
         )}
 
         {messages.map((m, i) => (
-          <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
+          >
             <div
               className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm ${
                 m.role === "user"
@@ -129,25 +137,39 @@ export default function DoctorFinderChat() {
               <p className="whitespace-pre-wrap leading-relaxed">{m.text}</p>
 
               {m.recommendedDoctors && m.recommendedDoctors.length > 0 && (
-                <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <AnimatedStagger className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
                   {m.recommendedDoctors.map((d) => (
-                    <div key={d.slug} className="[&>div]:shadow-none">
+                    <AnimatedStaggerItem key={d.slug} className="[&>div]:shadow-none">
                       <DoctorCard doctor={d} />
-                    </div>
+                    </AnimatedStaggerItem>
                   ))}
-                </div>
+                </AnimatedStagger>
               )}
             </div>
-          </div>
+          </motion.div>
         ))}
 
-        {loading && (
-          <div className="flex justify-start">
-            <div className="flex items-center gap-2 rounded-2xl bg-surface-soft px-4 py-3 text-sm text-navy-300 dark:bg-white/10 dark:text-white/50">
-              <Loader2 size={14} className="animate-spin" /> Reviewing...
-            </div>
-          </div>
-        )}
+        <AnimatePresence>
+          {loading && (
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="flex justify-start"
+            >
+              <div className="flex items-center gap-1.5 rounded-2xl bg-surface-soft px-4 py-3.5 dark:bg-white/10">
+                {[0, 1, 2].map((dot) => (
+                  <motion.span
+                    key={dot}
+                    className="h-1.5 w-1.5 rounded-full bg-navy-300 dark:bg-white/50"
+                    animate={{ y: [0, -4, 0] }}
+                    transition={{ duration: 0.9, repeat: Infinity, delay: dot * 0.15, ease: "easeInOut" }}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {error && (

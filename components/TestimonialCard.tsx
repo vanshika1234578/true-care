@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { Quote } from "lucide-react";
 
 export default function TestimonialCard({
@@ -12,7 +15,11 @@ export default function TestimonialCard({
   quote: string;
 }) {
   return (
-    <div className="flex h-full flex-col rounded-2xl border border-navy-100/70 bg-white p-7 shadow-card dark:border-white/10 dark:bg-white/5">
+    <motion.div
+      whileHover={{ y: -4 }}
+      transition={{ type: "spring", stiffness: 300, damping: 22 }}
+      className="flex h-full flex-col rounded-2xl border border-navy-100/70 bg-white p-7 shadow-card transition-shadow duration-300 hover:shadow-glow dark:border-white/10 dark:bg-white/5"
+    >
       <Quote size={22} className="text-teal-400" />
       <p className="mt-4 flex-1 text-[15px] leading-relaxed text-navy-500 dark:text-white/80">
         “{quote}”
@@ -25,6 +32,6 @@ export default function TestimonialCard({
           {country} • {treatment}
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 }

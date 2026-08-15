@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
 type FAQ = { q: string; a: string };
 
-export default function FAQAccordion({ faqs }: { faqs: readonly FAQ[] }) {
+export default function FAQAccordion({ faqs }: { faqs: FAQ[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
@@ -22,22 +23,31 @@ export default function FAQAccordion({ faqs }: { faqs: readonly FAQ[] }) {
               <span className="font-display text-[15px] font-semibold text-navy-500 dark:text-white">
                 {faq.q}
               </span>
-              <ChevronDown
-                size={18}
-                className={`flex-shrink-0 text-navy-300 transition-transform duration-300 dark:text-white/50 ${
-                  isOpen ? "rotate-180 text-primary-500" : ""
-                }`}
-              />
+              <motion.span
+                animate={{ rotate: isOpen ? 180 : 0 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                className="flex-shrink-0"
+              >
+                <ChevronDown
+                  size={18}
+                  className={`text-navy-300 dark:text-white/50 ${isOpen ? "text-primary-500 dark:text-primary-300" : ""}`}
+                />
+              </motion.span>
             </button>
-            <div
-              className={`overflow-hidden transition-all duration-300 ${
-                isOpen ? "max-h-96 pb-5" : "max-h-0"
-              }`}
-            >
-              <p className="text-sm leading-relaxed text-navy-300 dark:text-white/60">
-                {faq.a}
-              </p>
-            </div>
+            <AnimatePresence initial={false}>
+              {isOpen && (
+                <motion.div
+                  key="content"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                  className="overflow-hidden"
+                >
+                  <p className="pb-5 text-sm leading-relaxed text-navy-300 dark:text-white/60">{faq.a}</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         );
       })}
