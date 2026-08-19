@@ -1,0 +1,630 @@
+export type Treatment = {
+  slug: string;
+  name: string;
+  icon: string;
+  summary: string;
+  overview: string;
+  symptoms: string[];
+  options: string[];
+  recovery: string;
+  whyIndia: string;
+  estimatedStay: string;
+  faqs: { q: string; a: string }[];
+};
+
+export const treatments: Treatment[] = [
+  {
+    slug: "cardiology",
+    name: "Cardiology",
+    icon: "Heart",
+    summary: "Heart screening, bypass surgery, valve repair, and interventional cardiology.",
+    overview:
+      "Our partner hospitals offer diagnostic cardiology, angioplasty, bypass surgery, and valve procedures using internationally recognized protocols, with cardiologists who regularly treat international patients.",
+    symptoms: ["Chest discomfort or pain", "Shortness of breath", "Irregular heartbeat", "Fatigue during routine activity"],
+    options: ["Coronary angiography", "Angioplasty and stenting", "Coronary artery bypass (CABG)", "Valve repair or replacement"],
+    recovery: "Most cardiac procedures involve a hospital stay of 5–7 days, followed by 1–2 weeks of monitored recovery before international travel is advised.",
+    whyIndia: "India's cardiac centers perform a high volume of complex procedures annually, with outcomes tracked against international benchmarks.",
+    estimatedStay: "2–3 weeks",
+    faqs: [
+      { q: "Will I need multiple visits?", a: "Most cardiology cases are resolved in a single visit, with follow-up consultations handled remotely once you're home." },
+      { q: "Can my cardiologist back home share my records?", a: "Yes. We help coordinate secure transfer of prior reports so your treating doctor in India has full context before you arrive." },
+    ],
+  },
+  {
+    slug: "oncology",
+    name: "Cancer Care",
+    icon: "Ribbon",
+    summary: "Multidisciplinary cancer treatment including surgery, chemotherapy, and radiation.",
+    overview:
+      "Partner oncology centers offer tumor boards that bring together surgeons, oncologists, and radiologists to plan treatment jointly, rather than in isolation.",
+    symptoms: ["Unexplained weight loss", "Persistent pain or lumps", "Changes in existing symptoms after prior treatment", "Abnormal test results requiring specialist review"],
+    options: ["Surgical oncology", "Chemotherapy and targeted therapy", "Radiation therapy (including IMRT/IGRT)", "Bone marrow transplant"],
+    recovery: "Recovery timelines vary widely by cancer type and stage. Your treatment plan will include a specific recovery and follow-up schedule before you travel.",
+    whyIndia: "Leading cancer centers in India offer advanced radiation technology and multidisciplinary planning, often at a fraction of comparable costs elsewhere.",
+    estimatedStay: "Varies by treatment plan — discussed during medical review",
+    faqs: [
+      { q: "Can treatment continue after I return home?", a: "Yes, for treatments like chemotherapy, we help identify how remaining cycles can be coordinated with a doctor in your home country when medically appropriate." },
+      { q: "How is my case reviewed before I travel?", a: "Your reports go to a tumor board for review, and you receive a written treatment plan before committing to travel." },
+    ],
+  },
+  {
+    slug: "orthopedics",
+    name: "Orthopedics",
+    icon: "Bone",
+    summary: "Joint replacement, spine surgery, and sports injury treatment.",
+    overview:
+      "From knee and hip replacement to complex spine surgery, our partner hospitals use established implant brands and structured rehabilitation programs.",
+    symptoms: ["Joint pain limiting daily activity", "Reduced mobility or stiffness", "Chronic back or spine pain", "Sports-related injury not improving with rest"],
+    options: ["Total knee/hip replacement", "Arthroscopic surgery", "Spine decompression and fusion", "Sports medicine and rehabilitation"],
+    recovery: "Joint replacement typically requires 10–14 days in India, including physiotherapy, before you're cleared to fly home.",
+    whyIndia: "High surgical volumes mean orthopedic teams have deep experience with both standard and complex cases, supported by dedicated physiotherapy units.",
+    estimatedStay: "2–3 weeks",
+    faqs: [
+      { q: "Will I need physiotherapy after surgery?", a: "Yes, physiotherapy begins within a day or two of most orthopedic surgeries and continues through your recovery stay." },
+      { q: "What implant brands are used?", a: "Hospitals typically offer a choice of internationally recognized implant brands, discussed with you during treatment planning." },
+    ],
+  },
+  {
+    slug: "ivf",
+    name: "IVF & Fertility",
+    icon: "Baby",
+    summary: "Fertility evaluation, IVF, ICSI, and related reproductive treatments.",
+    overview:
+      "Fertility clinics offer a full diagnostic workup for both partners, followed by a personalized treatment plan and transparent success-rate discussions.",
+    symptoms: ["Difficulty conceiving after 12 months of trying", "Recurrent pregnancy loss", "Diagnosed reproductive health conditions", "Prior unsuccessful fertility treatment"],
+    options: ["IVF (In Vitro Fertilization)", "ICSI", "Egg/sperm freezing", "Fertility preservation before other medical treatment"],
+    recovery: "An IVF cycle typically requires 2–3 weeks in India for monitoring, egg retrieval, and embryo transfer.",
+    whyIndia: "Fertility clinics combine modern lab technology with experienced embryologists, and are transparent about realistic success rates for your specific case.",
+    estimatedStay: "2–3 weeks per cycle",
+    faqs: [
+      { q: "How many clinic visits are needed?", a: "Most of the cycle involves monitoring visits every 2–3 days, with two key procedure days — retrieval and transfer." },
+      { q: "Is donor egg or sperm available if needed?", a: "Yes, where medically indicated and legally permitted, this is discussed as part of your treatment planning." },
+    ],
+  },
+  {
+    slug: "dental",
+    name: "Dental Care",
+    icon: "Smile",
+    summary: "Implants, full-mouth rehabilitation, and cosmetic dentistry.",
+    overview:
+      "Dental partners handle everything from single implants to full-mouth rehabilitation, using digital scanning and same-visit planning where possible.",
+    symptoms: ["Missing or damaged teeth", "Chronic jaw pain", "Need for full-mouth rehabilitation", "Cosmetic concerns affecting confidence"],
+    options: ["Dental implants", "Full-mouth rehabilitation", "Root canal and crowns", "Cosmetic dentistry (veneers, smile design)"],
+    recovery: "Simple procedures may be completed in 3–5 days. Implant cases with grafting may require a longer stay or a planned second visit.",
+    whyIndia: "Dental centers offer digital planning tools and a wide range of implant systems, with same-city lab support for faster turnaround.",
+    estimatedStay: "5 days – 2 weeks depending on procedure",
+    faqs: [
+      { q: "Can implants be completed in one trip?", a: "Straightforward implant cases often can. Cases needing bone grafting may require healing time before the final crown, sometimes across two visits." },
+    ],
+  },
+  {
+    slug: "cosmetic",
+    name: "Cosmetic Surgery",
+    icon: "Sparkles",
+    summary: "Reconstructive and aesthetic procedures with board-certified surgeons.",
+    overview:
+      "Cosmetic procedures are performed by board-certified plastic surgeons, with clear pre- and post-operative guidance and realistic expectation-setting.",
+    symptoms: ["Aesthetic concerns affecting confidence", "Post-injury or post-surgical reconstruction needs", "Prior surgery requiring revision"],
+    options: ["Rhinoplasty", "Body contouring", "Reconstructive surgery", "Hair transplantation"],
+    recovery: "Recovery ranges from a few days to two weeks depending on the procedure, with clear activity restrictions provided in writing.",
+    whyIndia: "Surgeons combine aesthetic training with high case volumes, and hospitals maintain dedicated recovery suites for privacy.",
+    estimatedStay: "1–2 weeks",
+    faqs: [
+      { q: "How is privacy handled?", a: "Partner hospitals offer private recovery rooms and discreet scheduling for cosmetic patients." },
+    ],
+  },
+  {
+    slug: "neurology",
+    name: "Neurology & Neurosurgery",
+    icon: "Brain",
+    summary: "Brain and spine surgery, stroke care, and neurological disorders.",
+    overview:
+      "Neurology teams manage conditions ranging from complex brain tumors to spine disorders, supported by advanced imaging and neuro-monitoring during surgery.",
+    symptoms: ["Persistent headaches or seizures", "Numbness, weakness, or coordination issues", "Diagnosed brain or spine tumors", "Post-stroke rehabilitation needs"],
+    options: ["Brain tumor surgery", "Spine surgery", "Stroke management and rehabilitation", "Deep brain stimulation"],
+    recovery: "Recovery timelines depend heavily on the specific condition and are outlined clearly as part of your treatment plan.",
+    whyIndia: "Neurosurgical teams have experience with complex, high-risk cases and access to intraoperative imaging and monitoring technology.",
+    estimatedStay: "Varies by diagnosis — discussed during medical review",
+    faqs: [
+      { q: "Can a second opinion be arranged before I decide on surgery?", a: "Yes, we can arrange a second specialist opinion on your existing scans and reports before you commit to travel." },
+    ],
+  },
+  {
+    slug: "transplants",
+    name: "Organ Transplants",
+    icon: "HeartPulse",
+    summary: "Kidney, liver, and bone marrow transplant programs.",
+    overview:
+      "Transplant programs follow strict legal and ethical protocols, with transparent guidance on donor eligibility requirements under Indian law.",
+    symptoms: ["End-stage organ failure diagnosis", "Physician recommendation for transplant evaluation", "Existing transplant list registration elsewhere"],
+    options: ["Kidney transplant (living donor)", "Liver transplant (living donor)", "Bone marrow / stem cell transplant"],
+    recovery: "Transplant recovery typically requires 4–6 weeks in India for the recipient, with additional monitoring for the donor.",
+    whyIndia: "India has an established legal framework for living-donor transplants and experienced transplant teams with structured post-operative care.",
+    estimatedStay: "4–6 weeks",
+    faqs: [
+      { q: "Who is eligible to be a donor?", a: "Donor eligibility follows Indian legal requirements, typically involving close relatives; we explain these requirements clearly before you travel." },
+    ],
+  },
+  {
+    slug: "ophthalmology",
+    name: "Ophthalmology",
+    icon: "Eye",
+    summary: "Cataract surgery, glaucoma treatment, LASIK, and pediatric eye care.",
+    overview:
+      "Ophthalmology teams handle everything from routine cataract surgery to complex glaucoma management, using micro-incision techniques and modern lens-implant options.",
+    symptoms: ["Blurred or cloudy vision", "Difficulty seeing at night", "Eye pain or pressure", "Sudden vision changes"],
+    options: ["Micro-incision cataract surgery with lens implant", "Glaucoma management", "LASIK and refractive surgery", "Pediatric ophthalmology"],
+    recovery: "Cataract surgery is typically a same-day procedure with vision improving within days; most patients can travel home within a week.",
+    whyIndia: "High-volume eye centers mean surgeons have performed thousands of procedures, often with same-day discharge and modern lens-implant technology.",
+    estimatedStay: "3–7 days",
+    faqs: [
+      { q: "Is cataract surgery painful?", a: "No — it's typically done under local anesthesia with eye drops, and most patients feel only mild pressure, not pain." },
+    ],
+  },
+  {
+    slug: "ent",
+    name: "ENT (Ear, Nose & Throat)",
+    icon: "Ear",
+    summary: "Sinus surgery, hearing restoration, thyroid surgery, and head & neck care.",
+    overview:
+      "ENT specialists treat conditions across the ear, nose, throat, and head and neck, using endoscopic and microsurgical techniques for faster recovery.",
+    symptoms: ["Chronic sinus congestion", "Hearing loss", "Snoring or sleep apnea", "Thyroid or salivary gland swelling"],
+    options: ["Endoscopic sinus surgery", "Cochlear implants / hearing restoration", "Tonsil and adenoid surgery", "Thyroid and salivary gland surgery"],
+    recovery: "Most ENT procedures are day-care or single-night-stay surgeries, with recovery measured in days rather than weeks.",
+    whyIndia: "Specialists use advanced tools like microdebriders, coblation, and endoscopes, allowing many procedures to be near-bloodless and same-day.",
+    estimatedStay: "3–5 days",
+    faqs: [
+      { q: "Will I need to stay in the hospital overnight?", a: "Many ENT procedures are day-care surgeries; more involved cases like sinus or skull-base surgery may need a short overnight stay." },
+    ],
+  },
+  {
+    slug: "gi-bariatric-surgery",
+    name: "GI & Bariatric Surgery",
+    icon: "Stethoscope",
+    summary: "Laparoscopic GI surgery, bariatric (weight-loss) surgery, and advanced endoscopy.",
+    overview:
+      "Gastrointestinal and bariatric surgeons use minimally invasive laparoscopic techniques for conditions ranging from severe obesity to complex GI disorders.",
+    symptoms: ["Severe obesity with related health conditions", "Chronic digestive disorders", "Gallbladder or hernia issues", "Diabetic foot or chronic wounds"],
+    options: ["Laparoscopic bariatric surgery", "Advanced laparoscopic GI surgery", "Single-incision laparoscopic surgery", "Varicose vein treatment (laser/RFA)"],
+    recovery: "Laparoscopic approaches typically mean shorter hospital stays and faster return to normal activity than open surgery.",
+    whyIndia: "Surgeons trained in advanced and single-incision laparoscopic techniques offer minimally invasive options for procedures that are often done as open surgery elsewhere.",
+    estimatedStay: "1–2 weeks",
+    faqs: [
+      { q: "Is bariatric surgery reversible?", a: "Some procedures are adjustable or reversible and others are not; your surgeon will walk you through which option fits your case before you decide." },
+    ],
+  },
+  {
+    slug: "rheumatology",
+    name: "Rheumatology",
+    icon: "Activity",
+    summary: "Diagnosis and management of arthritis, autoimmune, and connective tissue disorders.",
+    overview:
+      "Rheumatologists manage chronic joint and autoimmune conditions like psoriatic arthritis and spondyloarthritis, often coordinating with orthopedics for joint-related complications.",
+    symptoms: ["Persistent joint pain or swelling", "Morning stiffness lasting over an hour", "Unexplained fatigue with joint symptoms", "Skin changes alongside joint pain"],
+    options: ["Disease-modifying therapy for inflammatory arthritis", "Management of psoriatic arthritis and spondyloarthritis", "Connective tissue disorder treatment", "Rheumatology emergency care"],
+    recovery: "Rheumatology is typically an ongoing outpatient management relationship rather than a single procedure with a fixed recovery timeline.",
+    whyIndia: "Specialists trained internationally in rheumatology emergencies and connective tissue disorders offer coordinated, outpatient-based care plans.",
+    estimatedStay: "Varies — often outpatient consultation-based",
+    faqs: [
+      { q: "Will I need ongoing visits after I return home?", a: "Likely yes for chronic conditions — we help coordinate follow-up care and medication management with a rheumatologist closer to home where possible." },
+    ],
+  },
+  {
+    slug: "internal-medicine",
+    name: "Internal Medicine",
+    icon: "Pill",
+    summary: "Diagnosis and management of complex, chronic, and infectious conditions.",
+    overview:
+      "Internal medicine physicians manage complex or overlapping conditions — diabetes, thyroid disorders, infectious diseases — often as the coordinating point across specialists.",
+    symptoms: ["Unexplained or persistent fever", "Diabetes or thyroid concerns", "Multiple overlapping health issues", "Need for a coordinating physician across specialists"],
+    options: ["Infectious disease management", "Diabetes and metabolic disorder care", "Thyroid disorder management", "Coordinated care across specialists"],
+    recovery: "Recovery and management timelines vary widely depending on the underlying condition being treated.",
+    whyIndia: "Physicians with fellowship training in infectious disease and metabolic disorders can coordinate care across multiple specialists during your visit.",
+    estimatedStay: "Varies by condition",
+    faqs: [
+      { q: "Can an internal medicine physician coordinate my other specialist visits?", a: "Yes — this is often exactly their role when your case involves more than one specialty." },
+    ],
+  },
+];
+
+export type Hospital = {
+  slug: string;
+  name: string;
+  city: string;
+  specialties: string[];
+  accreditations: string[];
+  overview: string;
+  beds: string;
+  image?: string;
+};
+
+export const hospitals: Hospital[] = [
+  {
+    slug: "artemis-hospitals-gurugram",
+    name: "Artemis Hospitals, Gurugram",
+    image: "/hospitals/artemis-gurugram.jpg",
+    city: "Gurugram",
+    specialties: ["Cardiology", "Oncology", "Orthopedics", "Neurology", "Transplant Surgery"],
+    accreditations: ["JCI Accredited", "NABH Accredited"],
+    overview: "A multi-specialty hospital in Gurugram — the first hospital in Gurugram to hold both JCI and NABH accreditation, with dedicated centres in cardiac sciences, oncology, neurosciences, orthopaedics, and organ transplant.",
+    beds: "Verify with hospital",
+  },
+  {
+    slug: "max-vaishali",
+    name: "Max Super Speciality Hospital, Vaishali",
+    image: "/hospitals/max-vaishali.jpg",
+    city: "Ghaziabad",
+    specialties: ["Cardiology", "Oncology", "Orthopedics", "Neurology", "Transplant Surgery", "IVF & Fertility", "Dental Care"],
+    accreditations: ["NABH Accredited", "NABL Accredited"],
+    overview: "A Max Healthcare multi-specialty hospital in Vaishali, Ghaziabad, part of the Max network serving the Delhi NCR region.",
+    beds: "Verify with hospital",
+  },
+  {
+    slug: "max-super-speciality-noida",
+    name: "Max Super Speciality Hospital, Noida",
+    image: "/hospitals/max-sector128-noida.jpg",
+    city: "Noida",
+    specialties: ["Cardiology", "Oncology", "Transplant Surgery"],
+    accreditations: ["NABH Accredited", "NABL Accredited"],
+    overview: "Formerly Jaypee Hospital, Noida — a large multi-specialty hospital in Wish Town, Sector-128, with dedicated units in nephrology/kidney transplant, surgical and medical oncology, interventional cardiology, cardiac surgery, and liver transplant.",
+    beds: "Verify with hospital",
+  },
+  {
+    slug: "aster-medcity-kochi",
+    name: "Aster Medcity, Kochi",
+    image: "/hospitals/aster-medcity-kochi.jpg",
+    city: "Kochi",
+    specialties: ["Cardiology", "Oncology", "Orthopedics", "Neurology", "Transplant Surgery", "IVF & Fertility", "Dental Care"],
+    accreditations: ["JCI Accredited", "NABH Accredited", "NABL Accredited"],
+    overview: "An 800-bed quaternary-care hospital on a 40-acre waterfront campus in Kochi — the first JCI-accredited quaternary care hospital in Kerala, with dedicated Centres of Excellence in cardiac sciences, neurosciences, oncology, orthopaedics, nephrology & urology, gastro sciences, liver care, women's health, paediatrics, and multi-organ transplant.",
+    beds: "800 beds (700 in-patient + 100 daycare)",
+  },
+  {
+    slug: "fortis-hospital-noida",
+    name: "Fortis Hospital, Noida",
+    image: "/hospitals/fortis-noida.jpg",
+    city: "Noida",
+    specialties: ["Cardiology", "Oncology", "Orthopedics", "Neurology", "Transplant Surgery", "Cosmetic Surgery", "IVF & Fertility"],
+    accreditations: ["NABH Accredited"],
+    overview: "A large multi-specialty hospital in Sector-62, Noida, co-located with the International Oncology Cancer Institute (IOCI), with dedicated units in cardiac sciences, surgical and medical oncology, neurosurgery, liver and kidney transplant, and plastic/cosmetic surgery.",
+    beds: "Verify with hospital",
+  },
+];
+
+export type Doctor = {
+  slug: string;
+  name: string;
+  specialty: string;
+  treatmentSlug: string;
+  hospital: string;
+  hospitalSlug: string;
+  experience: string;
+  qualifications?: string;
+  languages: string[];
+  photo?: string;
+};
+
+export const doctors: Doctor[] = [
+  { slug: "dr-rahul-gupta", name: "Dr. Rahul Gupta", specialty: "Neurosurgery", treatmentSlug: "neurology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "23+ years", qualifications: "MBBS (Govt. Medical College, Rohtak), MS (General Surgery, PGIMS Rohtak), M.Ch (Neurosurgery, PGIMER Chandigarh)", languages: ["English", "Hindi"], photo: "/doctors/dr-rahul-gupta.jpg" },
+  { slug: "dr-rajat-bajaj", name: "Dr. Rajat Bajaj", specialty: "Medical Oncology", treatmentSlug: "oncology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "10+ years", qualifications: "MBBS, MD (Internal Medicine, MAMC), DNB-SS (Medical Oncology, RGCI)", languages: ["English", "Hindi"], photo: "/doctors/dr-rajat-bajaj.jpg" },
+  { slug: "dr-vikas-dua", name: "Dr. Vikas Dua", specialty: "Paediatric Haematology, Oncology & Bone Marrow Transplant", treatmentSlug: "transplants", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS, MD (Paediatrics, PGIMS Rohtak), FNB (Paediatric Hematology Oncology, Sir Ganga Ram Hospital)", languages: ["English", "Hindi"], photo: "/doctors/dr-vikas-dua.jpg" },
+  { slug: "dr-vishal-bansal", name: "Dr. Vishal Bansal", specialty: "Surgical Oncology", treatmentSlug: "oncology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS (JIPMER Puducherry), MS (General Surgery, PGIMS Rohtak), MCh (Surgical Oncology, GCRI Ahmedabad)", languages: ["English", "Hindi"], photo: "/doctors/dr-vishal-bansal.jpg" },
+  { slug: "dr-vishvanathan-dudani", name: "Dr. Vishvanathan Dudani", specialty: "Plastic, Reconstructive & Cosmetic Surgery", treatmentSlug: "cosmetic", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "20+ years", qualifications: "MBBS, MS (General Surgery), M.Ch (Plastic Surgery)", languages: ["English", "Hindi"], photo: "/doctors/dr-vishvanathan-dudani.jpg" },
+  { slug: "dr-vivek-vij", name: "Dr. Vivek Vij", specialty: "Liver Transplantation & GI Surgery", treatmentSlug: "transplants", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS (B.J. Medical College, Pune), MS (General Surgery), DNB, MRCS (Edinburgh)", languages: ["English", "Hindi"], photo: "/doctors/dr-vivek-vij.jpg" },
+  { slug: "dr-rahul-bhargava", name: "Dr. Rahul Bhargava", specialty: "Haematology, Haemato-Oncology & Bone Marrow Transplant", treatmentSlug: "transplants", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS, MD (General Medicine, Gandhi Medical College Bhopal), DM (Haematology, AIIMS New Delhi)", languages: ["English", "Hindi"], photo: "/doctors/dr-rahul-bhargava.jpg" },
+  { slug: "dr-ajay-kaul", name: "Dr. Ajay Kaul", specialty: "Cardiac Sciences (Cardiothoracic & Vascular Surgery)", treatmentSlug: "cardiology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "38+ years", qualifications: "MBBS, MS (General Surgery), M.Ch (Cardiothoracic & Vascular Surgery, Bombay University)", languages: ["English", "Hindi"], photo: "/doctors/dr-ajay-kaul.jpg" },
+  { slug: "dr-anita-malik", name: "Dr. Anita Malik", specialty: "Radiation Oncology", treatmentSlug: "oncology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS (Netaji Subhash Chandra Bose Medical College), MD (Radiotherapy, Govt. Medical College Indore)", languages: ["English", "Hindi"], photo: "/doctors/dr-anita-malik.jpg" },
+  { slug: "dr-anjana-singh", name: "Dr. Anjana Singh", specialty: "Obstetrics & Gynaecology - Infertility Treatment", treatmentSlug: "ivf", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "23 years", qualifications: "MBBS (Guru Nanak Dev University), DNB (National Board of Examinations)", languages: ["English", "Hindi"], photo: "/doctors/dr-anjana-singh.jpg" },
+  { slug: "dr-anuja-porwal", name: "Dr. Anuja Porwal", specialty: "Nephrology - Kidney Transplant", treatmentSlug: "transplants", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS (B.R.D. Medical College Gorakhpur), DNB (Medicine), DNB (Nephrology)", languages: ["English", "Hindi"], photo: "/doctors/dr-anuja-porwal.jpg" },
+  { slug: "dr-arvind-jain", name: "Dr. Arvind Jain", specialty: "Plastic, Reconstructive & Cosmetic Surgery", treatmentSlug: "cosmetic", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS (MLB Medical College Jhansi), MS (King George Medical College Lucknow), M.Ch (Plastic Surgery, GMC Nagpur)", languages: ["English", "Hindi"], photo: "/doctors/dr-arvind-jain.jpg" },
+  { slug: "dr-atul-mishra", name: "Dr. Atul Mishra", specialty: "Orthopaedics - Joint Replacement Surgery", treatmentSlug: "orthopedics", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "18+ years", qualifications: "MBBS (Rajasthan University), MS (Orthopaedics, Gujarat University), Fellowship in Joint Reconstruction (Chiba University, Japan)", languages: ["English", "Hindi"], photo: "/doctors/dr-atul-mishra.jpg" },
+  { slug: "dr-jalaj-baxi", name: "Dr Jalaj Baxi", specialty: "Surgical Oncology", treatmentSlug: "oncology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "25+ years", qualifications: "MBBS, MS (General Surgery, RNT Medical College Udaipur), DNB (Surgery), Fellowship in Surgical Oncology (GCRI)", languages: ["English", "Hindi"] },
+  { slug: "dr-jyoti-anand", name: "Dr. Jyoti Anand", specialty: "Medical Oncology", treatmentSlug: "oncology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "20+ years", qualifications: "MBBS (Sri Guru Ram Dass Institute of Medical Sciences), DNB (Internal Medicine), DNB (Medical Oncology)", languages: ["English", "Hindi"], photo: "/doctors/dr-jyoti-anand.jpg" },
+  { slug: "dr-jyoti-b-sharma", name: "Dr. Jyoti B. Sharma", specialty: "Neurology", treatmentSlug: "neurology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS, DM (Neurology, GB Pant Hospital / GIPMER New Delhi)", languages: ["English", "Hindi"], photo: "/doctors/dr-jyoti-b-sharma.jpg" },
+  { slug: "dr-kabir-rehmani", name: "Dr. Kabir Rehmani", specialty: "Surgical Oncology", treatmentSlug: "oncology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "22 years", qualifications: "MBBS (Jabalpur), MS (General Surgery, Mumbai University), Fellowship Head & Neck Surgical Oncology (Tata Memorial Hospital); Member, Royal College of Surgeons Edinburgh", languages: ["English", "Hindi"], photo: "/doctors/dr-kabir-rehmani.jpg" },
+  { slug: "dr-mukul-rastogi", name: "Dr. Mukul Rastogi", specialty: "Hepatology, Gastroenterology & Liver Transplant", treatmentSlug: "transplants", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS, MD (General Medicine), DNB (Medicine), DM (Gastroenterology) - SMS Medical College, Jaipur", languages: ["English", "Hindi"], photo: "/doctors/dr-mukul-rastogi.jpg" },
+  { slug: "dr-piyush-varshney", name: "Dr. Piyush Varshney", specialty: "Urology & Kidney Transplant", treatmentSlug: "transplants", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "20 years", qualifications: "MBBS (JNMC, AMU Aligarh), MS (General Surgery), M.Ch (Urology, Sion Hospital Mumbai, Gold Medal)", languages: ["English", "Hindi"], photo: "/doctors/dr-piyush-varshney.jpg" },
+  { slug: "dr-shailendra-kumar-goel", name: "Dr. Shailendra Kumar Goel", specialty: "Urology & Kidney Transplant", treatmentSlug: "transplants", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "26+ years", qualifications: "MBBS (S.N. Medical College, Agra), MS (General Surgery, UCMS & GTB Hospital Delhi), DNB (Genito-Urinary Surgery), M.Ch (Urology, SGPGIMS Lucknow)", languages: ["English", "Hindi"], photo: "/doctors/dr-shailendra-kumar-goel.jpg" },
+  { slug: "dr-neetu-sharma", name: "Dr. Neetu Sharma", specialty: "Ophthalmology - Cataract & Glaucoma Surgery", treatmentSlug: "ophthalmology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "25+ years", qualifications: "M.B.B.S (University of Madras, JIPMER Pondicherry), M.S (Ophthalmology, Gold Medalist), Fellowship in Cataract Surgery (L.V. Prasad Eye Institute, Hyderabad)", languages: ["English", "Hindi"], photo: "/doctors/dr-neetu-sharma.jpg" },
+  { slug: "dr-savyasachi-saxena", name: "Dr. Savyasachi Saxena", specialty: "ENT - Ear, Nose, Throat & Head-Neck Surgery", treatmentSlug: "ent", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "18 years", qualifications: "M.B.B.S (Ganesh Shankar Vidyarthi Memorial Medical College, Kanpur), MS (ENT, Moti Lal Nehru Medical College, Allahabad)", languages: ["English", "Hindi"], photo: "/doctors/dr-savyasachi-saxena.jpg" },
+  { slug: "dr-vs-chauhan", name: "Dr. V.S Chauhan", specialty: "Minimally Invasive, GI & Advanced Laparoscopic Surgery", treatmentSlug: "gi-bariatric-surgery", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "20+ years", qualifications: "MBBS, MS (Surgery, Banaras Hindu University), Fellow of American College of Surgeons (FACS), Fellow Royal College of Surgeons and Physicians of Glasgow (FRCS)", languages: ["English", "Hindi"], photo: "/doctors/dr-vs-chauhan.jpg" },
+  { slug: "dr-bimlesh-dhar-pandey", name: "Dr. Bimlesh Dhar Pandey", specialty: "Rheumatology", treatmentSlug: "rheumatology", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "MBBS (Calicut University, Kerala), MD (Internal Medicine, RIMS Ranchi), Fellowship in Rheumatology (University of Leeds, UK)", languages: ["English", "Hindi"], photo: "/doctors/dr-bimlesh-dhar-pandey.jpg" },
+  { slug: "dr-ajay-aggarwal", name: "Dr. Ajay Aggarwal", specialty: "Internal Medicine", treatmentSlug: "internal-medicine", hospital: "Fortis Hospital, Noida", hospitalSlug: "fortis-hospital-noida", experience: "Confirm with hospital", qualifications: "M.B.B.S, M.D, Fellowship in Infectious Diseases", languages: ["English", "Hindi"], photo: "/doctors/dr-ajay-aggarwal.jpg" },
+  { slug: "dr-vijay-kumar-sinha", name: "Dr. Vijay Kumar Sinha", specialty: "Nephrology & Kidney Transplant", treatmentSlug: "transplants", hospital: "Max Super Speciality Hospital, Noida", hospitalSlug: "max-super-speciality-noida", experience: "Confirm with hospital", qualifications: "MBBS (Calcutta University), MD (Medicine, Patna University), DNB (Nephrology, Indraprastha Apollo Hospital)", languages: ["English", "Hindi"], photo: "/doctors/dr-vijay-kumar-sinha.jpg" },
+  { slug: "dr-anil-prasad-bhatt", name: "Dr. Anil Prasad Bhatt", specialty: "Nephrology & Kidney Transplant", treatmentSlug: "transplants", hospital: "Max Super Speciality Hospital, Noida", hospitalSlug: "max-super-speciality-noida", experience: "Confirm with hospital", qualifications: "MBBS, MD (General Medicine, GSVM Medical College Kanpur), DM (Nephrology, AIIMS New Delhi)", languages: ["English", "Hindi"], photo: "/doctors/dr-anil-prasad-bhatt.jpg" },
+  { slug: "dr-sm-shuaib-zaidi", name: "Dr S. M. Shuaib Zaidi", specialty: "Surgical Oncology", treatmentSlug: "oncology", hospital: "Max Super Speciality Hospital, Noida", hospitalSlug: "max-super-speciality-noida", experience: "Confirm with hospital", qualifications: "MBBS (Maulana Azad Medical College), MS (Surgery, Safdarjung Hospital), DNB (Surgery), MCh (Surgical Oncology, Cancer Institute WIA Chennai)", languages: ["English", "Hindi"] },
+  { slug: "dr-sujeet-narain", name: "Dr Sujeet Narain", specialty: "Interventional Cardiology", treatmentSlug: "cardiology", hospital: "Max Super Speciality Hospital, Noida", hospitalSlug: "max-super-speciality-noida", experience: "Confirm with hospital", qualifications: "MBBS (Patliputra Medical College, Dhanbad), MD (Medicine, Rajendra Institute of Medical Sciences, Ranchi), DNB (Cardiology, Fortis Escorts Heart Institute)", languages: ["English", "Hindi"] },
+  { slug: "dr-krishnanu-dutta-choudhury", name: "Dr. Krishnanu Dutta Choudhury", specialty: "Cardiac Surgery", treatmentSlug: "cardiology", hospital: "Max Super Speciality Hospital, Noida", hospitalSlug: "max-super-speciality-noida", experience: "Confirm with hospital", qualifications: "MBBS (Silchar Medical College), MS (General Surgery, Gauhati Medical College), M.Ch (Cardio Thoracic Vascular Surgery, PGIMER and Dr. RML Hospital)", languages: ["English", "Hindi"], photo: "/doctors/dr-krishnanu-dutta-choudhury.jpg" },
+  { slug: "dr-manoj-luthra", name: "Dr. Manoj Luthra", specialty: "Cardiac Surgery", treatmentSlug: "cardiology", hospital: "Max Super Speciality Hospital, Noida", hospitalSlug: "max-super-speciality-noida", experience: "Confirm with hospital", qualifications: "MBBS, MS (General Surgery), DNB (General Surgery), M.Ch (Cardiac Surgery, Armed Forces Medical College Pune); performed the first heart transplant in the Indian Army (2007)", languages: ["English", "Hindi"], photo: "/doctors/dr-manoj-luthra.jpg" },
+  { slug: "dr-kr-vasudevan", name: "Dr. K R Vasudevan", specialty: "Liver Transplant & Surgical Gastroenterology", treatmentSlug: "transplants", hospital: "Max Super Speciality Hospital, Noida", hospitalSlug: "max-super-speciality-noida", experience: "Confirm with hospital", qualifications: "MBBS, MS (General Surgery, Goa Medical College), DNB (Surgical Gastroenterology, Sir Ganga Ram Hospital)", languages: ["English", "Hindi"], photo: "/doctors/dr-kr-vasudevan.jpg" },
+  { slug: "dr-atul-sharma-oncology", name: "Dr. Atul Sharma", specialty: "Medical Oncology", treatmentSlug: "oncology", hospital: "Max Super Speciality Hospital, Noida", hospitalSlug: "max-super-speciality-noida", experience: "Confirm with hospital", qualifications: "MBBS, MD (Internal Medicine, Govt. Medical College Jammu), DM (Medical Oncology, AIIMS New Delhi), MRCP, MNAMS", languages: ["English", "Hindi"], photo: "/doctors/dr-atul-sharma-oncology.jpg" },
+  { slug: "dr-jeeson-c-unni", name: "Dr. Jeeson C Unni", specialty: "Paediatrics", treatmentSlug: "internal-medicine", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+    photo: "https://www.asterhospitals.in/sites/default/files/2026-05/Dr.%20Jeeson%20C%20Unni.jpg",
+  },
+  { slug: "dr-ismail-siyad-k-h", name: "Dr. Ismail Siyad K H", specialty: "Medical Gastroenterology", treatmentSlug: "gi-bariatric-surgery", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-zareena-khalid", name: "Dr. Zareena A Khalid", specialty: "Obstetrics & Gynaecology, Minimally Invasive Surgery", treatmentSlug: "ivf", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-anitha-vijayan", name: "Dr. Anitha Vijayan", specialty: "Developmental Paediatrics", treatmentSlug: "internal-medicine", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-vinod-kumar-p", name: "Dr. Vinod Kumar P", specialty: "Orthopaedics", treatmentSlug: "orthopedics", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-renji-jos-aster", name: "Dr. Renji Jos", specialty: "Internal Medicine", treatmentSlug: "internal-medicine", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "20+ years",
+    qualifications: "MBBS, MD, PDDM",
+    languages: ["English", "Malayalam", "Hindi"],
+    photo: "https://www.asterhospitals.in/sites/default/files/2026-05/Dr.%20Renji%20Jos.jpg",
+  },
+  { slug: "dr-prakash-k", name: "Dr. Prakash K", specialty: "Surgical Gastroenterology", treatmentSlug: "gi-bariatric-surgery", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-nimitha-k-mohan", name: "Dr. (Maj) Nimitha K Mohan", specialty: "Clinical Microbiology & Infection Control", treatmentSlug: "internal-medicine", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-jem-kalathil", name: "Dr. Jem Kalathil", specialty: "Surgical Oncology", treatmentSlug: "oncology", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-v-narayanan-unni", name: "Dr. V. Narayanan Unni", specialty: "Nephrology", treatmentSlug: "transplants", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+    photo: "https://www.asterhospitals.in/sites/default/files/2026-05/Dr.%20V.%20Narayanan%20Unni.JPG",
+  },
+  { slug: "dr-mathew-jacob", name: "Dr. Mathew Jacob", specialty: "Hepato Pancreato Biliary & Abdominal Multi Organ Transplant", treatmentSlug: "transplants", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+    photo: "https://www.asterhospitals.in/sites/default/files/2026-05/Dr.%20Mathew%20Jacob.jpg",
+  },
+  { slug: "dr-shyam-sundar-s", name: "Dr. Shyam Sundar S", specialty: "Neurosurgery", treatmentSlug: "neurology", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-anil-kumar-r", name: "Dr. Anil Kumar R", specialty: "Interventional Cardiology", treatmentSlug: "cardiology", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-urmila-soman", name: "Dr. Urmila Soman", specialty: "Minimally Invasive & Robotic Gynaecology", treatmentSlug: "ivf", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-suresh-g-nair", name: "Dr. Suresh G Nair", specialty: "Anaesthesiology and Critical Care", treatmentSlug: "internal-medicine", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-sidharth-j-unnithan", name: "Dr. Sidharth J Unnithan", specialty: "Sports Medicine", treatmentSlug: "orthopedics", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-sabarinath-menon", name: "Dr. Sabarinath Menon", specialty: "Paediatric Cardiac Surgery", treatmentSlug: "cardiology", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-varghese-jomy", name: "Dr. Varghese Jomy", specialty: "Wellness", treatmentSlug: "internal-medicine", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-charles-panackel", name: "Dr. Charles Panackel", specialty: "Hepatology", treatmentSlug: "gi-bariatric-surgery", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-dilip-panikar", name: "Dr. Dilip Panikar", specialty: "Neurosurgery", treatmentSlug: "neurology", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-rajiv-c", name: "Dr. Rajiv C", specialty: "Director, Advanced Heart Valve Centre & Interventional Cardiology", treatmentSlug: "cardiology", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-kishore-t-a", name: "Dr. Kishore T. A", specialty: "Uro Oncology & Transplant Surgery", treatmentSlug: "oncology", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-shawn-t-joseph", name: "Dr. Shawn T Joseph", specialty: "Program Director, Head & Neck Oncology Network, Kerala", treatmentSlug: "oncology", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-jithendra-t", name: "Dr. Jithendra T", specialty: "Anaesthesiology and Critical Care", treatmentSlug: "internal-medicine", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-jijo-paul", name: "Dr. Jijo Paul", specialty: "Dental Surgery", treatmentSlug: "dental", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-kiran-v-r", name: "Dr. Kiran V R", specialty: "Paediatric Surgery & Paediatric Urology", treatmentSlug: "internal-medicine", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-maria-grace-treasa", name: "Dr. Maria Grace Treasa", specialty: "Speech Language Pathology", treatmentSlug: "internal-medicine", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-asha-kishore", name: "Dr. Asha Kishore", specialty: "Director, Parkinson's & Movement Disorders Centre", treatmentSlug: "neurology", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-anil-n-x-aster", name: "Dr. Anil N X", specialty: "Internal Medicine", treatmentSlug: "internal-medicine", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    qualifications: "MBBS, MD (General Medicine)",
+    languages: ["English", "Malayalam", "Hindi"],
+    photo: "https://www.asterhospitals.in/sites/default/files/2026-05/Dr.%20Anil%20N%20X.jpg",
+  },
+  { slug: "dr-sandeep-prabhakaran", name: "Dr. Sandeep Prabhakaran", specialty: "Program Director, Laser Endourology", treatmentSlug: "transplants", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-arun-roy-james", name: "Dr. Arun Roy James", specialty: "Pediatric Dentistry", treatmentSlug: "dental", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+  { slug: "dr-geetha-mammayil", name: "Dr. Geetha Mammayil", specialty: "Paediatric Medical Gastroenterology", treatmentSlug: "gi-bariatric-surgery", hospital: "Aster Medcity, Kochi", hospitalSlug: "aster-medcity-kochi", experience: "Confirm with hospital",
+    languages: ["English", "Malayalam", "Hindi"],
+  },
+
+  // Max Super Speciality Hospital, Vaishali — from official hospital "Doctor
+  // Introduction" profile sheets. Experience is only stated as a figure where
+  // the source sheet gives an explicit total; otherwise "Confirm with
+  // hospital", consistent with how every other doctor in this file is handled.
+  { slug: "dr-vivek-verma", name: "Dr Vivek Verma", specialty: "Orthopaedic Oncology & Joint Reconstructive Surgeries (Adult & Paediatrics – Musculoskeletal & Bone Cancer)", treatmentSlug: "orthopedics", hospital: "Max Super Speciality Hospital, Vaishali", hospitalSlug: "max-vaishali", experience: "Confirm with hospital",
+    qualifications: "MBBS (B.J. Medical College, Pune), DNB Orthopaedic Surgery (MIOT Hospitals, Chennai), Clinical Fellowship in Trauma and Joint Replacement (BG Klinik, Tuebingen, Germany), Fellowship in Orthopaedic Oncology (Tata Memorial Centre, Mumbai)",
+    languages: ["English", "Hindi"], photo: "/doctors/dr-vivek-verma.jpg",
+  },
+  { slug: "dr-rashi-agrawal", name: "Dr Rashi Agrawal", specialty: "Radiation Oncology — Senior Director, Clinical Administrator & Program Coordinator", treatmentSlug: "oncology", hospital: "Max Super Speciality Hospital, Vaishali", hospitalSlug: "max-vaishali", experience: "Confirm with hospital",
+    qualifications: "MBBS (Sarojini Naidu Medical College, Agra), Post Graduation Radiation Oncology (GSVM Medical College, Kanpur), Fellowship (Tata Memorial Hospital, Mumbai), International Fellowship (UICC, Geneva)",
+    languages: ["English", "Hindi"], photo: "/doctors/dr-rashi-agrawal.jpg",
+  },
+  { slug: "dr-hrishikesh-chakrabartty", name: "Dr Hrishikesh Chakrabartty", specialty: "Neurosurgery — Associate Director", treatmentSlug: "neurology", hospital: "Max Super Speciality Hospital, Vaishali", hospitalSlug: "max-vaishali", experience: "Confirm with hospital",
+    qualifications: "MBBS (Assam Medical College, Dibrugarh), MS General Surgery (Assam Medical College, Dibrugarh), M.Ch Neurosurgery (Sawai Man Singh Medical College, Jaipur)",
+    languages: ["English", "Hindi"], photo: "/doctors/dr-hrishikesh-chakrabartty.jpg",
+  },
+  { slug: "dr-vivek-kumar-cardiology", name: "Dr Vivek Kumar", specialty: "Interventional Cardiology & Head of Structural Heart Program — Director", treatmentSlug: "cardiology", hospital: "Max Super Speciality Hospital, Vaishali", hospitalSlug: "max-vaishali", experience: "Confirm with hospital",
+    qualifications: "MBBS (Nalanda Medical College & Hospital), MD Medicine & DM Cardiology (Banaras Hindu University), Fellowship Adult Interventional Cardiology (SCAI New Delhi Centre), International Preceptorship in Structural Heart Interventions — TAVR & MitraClip (Cleveland Clinic, USA), Preceptorship TAVI & MitraClip (The Mount Sinai Hospital, New York, USA)",
+    languages: ["English", "Hindi"], photo: "/doctors/dr-vivek-kumar-cardiology.jpg",
+  },
+  { slug: "dr-naveen-pandita", name: "Dr Naveen Pandita", specialty: "Spine Surgery & Spinal Deformity — Senior Consultant", treatmentSlug: "orthopedics", hospital: "Max Super Speciality Hospital, Vaishali", hospitalSlug: "max-vaishali", experience: "Confirm with hospital",
+    qualifications: "M.B.B.S (A.C.P.M Medical College, Dhule), M.S Orthopaedics (Government Medical College, Jammu), Spine and Complex Spine Surgery Fellowship (Cambridge University Hospital), Advanced Spine Fellowship (Royal College of Surgeons of England), Spine Fellowship (Royal College of Surgeons of Edinburgh), Complex Spine Surgery Fellowship (National University Hospital, Singapore)",
+    languages: ["English", "Hindi"], photo: "/doctors/dr-naveen-pandita.jpg",
+  },
+  { slug: "dr-nikunj-agrawal", name: "Dr. Nikunj Agrawal", specialty: "Orthopaedics & Joint Replacement, Robotics — Associate Director", treatmentSlug: "orthopedics", hospital: "Max Super Speciality Hospital, Vaishali", hospitalSlug: "max-vaishali", experience: "15+ years",
+    qualifications: "MBBS (Manipal Academy of Higher Education), DNB Orthopaedic Surgery, MNAMS Orthopaedic Surgery, MRCS (UK), Fellowship in Robotic Joint Replacement (Singapore), Clinical Fellowships in Joint Replacement (NHS, Singapore and Harvard Medical School, USA)",
+    languages: ["English", "Hindi"], photo: "/doctors/dr-nikunj-agrawal.jpg",
+  },
+  { slug: "dr-sowjanya-aggarwal", name: "Dr Sowjanya Aggarwal", specialty: "Obstetrics, Gynaecology, Infertility & IVF (Laparoscopic & Robotic Surgery) — Senior Director", treatmentSlug: "ivf", hospital: "Max Super Speciality Hospital, Vaishali", hospitalSlug: "max-vaishali", experience: "18+ years",
+    qualifications: "M.B.B.S (JSS Medical College, Mysore), M.S Obstetrics & Gynaecology (Sri Ramachandra Medical College, Chennai), Fellowship in Minimal Access Surgery & Reproductive Medicine (Paul's Hospital, Cochin, Kerala)",
+    languages: ["English", "Hindi"], photo: "/doctors/dr-sowjanya-aggarwal.jpg",
+  },
+  { slug: "dr-anant-kumar", name: "Dr Anant Kumar", specialty: "Urology, Uro-Oncology and Kidney Transplantation — Chairman", treatmentSlug: "transplants", hospital: "Max Super Speciality Hospital, Vaishali", hospitalSlug: "max-vaishali", experience: "Confirm with hospital",
+    qualifications: "M.B.B.S (King George Medical University, Lucknow), M.S General Surgery (PGIMER, Chandigarh), M.Ch Urology (PGIMER, Chandigarh), DNB Urology (PGIMER, Chandigarh)",
+    languages: ["English", "Hindi"], photo: "/doctors/dr-anant-kumar.jpg",
+  },
+  { slug: "dr-gopal-sharma", name: "Dr Gopal Sharma", specialty: "Medical Oncology (Breast, Thoracic, Gynaecology) — Vice Chairman", treatmentSlug: "oncology", hospital: "Max Super Speciality Hospital, Vaishali", hospitalSlug: "max-vaishali", experience: "Confirm with hospital",
+    qualifications: "MBBS (Sardar Patel Medical College, Bikaner), MD General Medicine (Sawai Man Singh Medical College, Jaipur), DM Medical Oncology (Gujarat Cancer Research Institute, Ahmedabad)",
+    languages: ["English", "Hindi"], photo: "/doctors/dr-gopal-sharma.jpg",
+  },
+  { slug: "dr-rajesh-dey", name: "Dr Rajesh Dey", specialty: "Liver Transplant, Biliary Sciences & Robotic Surgery — Director", treatmentSlug: "transplants", hospital: "Max Super Speciality Hospital, Vaishali", hospitalSlug: "max-vaishali", experience: "Confirm with hospital",
+    qualifications: "MBBS (Medical College Calcutta, University of Calcutta), MS General Surgery (IPGMER & SSKM Hospital, University of Calcutta), MRCS (Royal College of Surgeons of England), Master in Hepatobiliary Surgery (Henri Bismuth Hepatobiliary Institute, Paris)",
+    languages: ["English", "Hindi"], photo: "/doctors/dr-rajesh-dey.jpg",
+  },
+  { slug: "dr-prachi-jain", name: "Dr Prachi Jain", specialty: "Pediatric Oncology — Associate Director", treatmentSlug: "oncology", hospital: "Max Super Speciality Hospital, Vaishali", hospitalSlug: "max-vaishali", experience: "Confirm with hospital",
+    qualifications: "MBBS (Pt. Bhagwat Dayal Sharma Post Graduate Institute of Medical Sciences, Rohtak), MD Paediatrics (University College of Medical Sciences & GTB Hospital, Delhi), FNB Paediatric Hematology-Oncology (Sir Ganga Ram Hospital, Delhi)",
+    languages: ["English", "Hindi"], photo: "/doctors/dr-prachi-jain.jpg",
+  },
+  { slug: "dr-subhash-gupta", name: "Dr. Subhash Gupta", specialty: "Max Centre for Liver & Biliary Sciences — Chairman", treatmentSlug: "transplants", hospital: "Max Super Speciality Hospital, Vaishali", hospitalSlug: "max-vaishali", experience: "Confirm with hospital",
+    qualifications: "All India Institute of Medical Sciences (AIIMS), New Delhi; pioneered Living Donor Liver Transplant (LDLT) in India",
+    languages: ["English", "Hindi"], photo: "/doctors/dr-subhash-gupta.jpg",
+  },
+  { slug: "dr-pradeep-kumar-haemato", name: "Dr Pradeep Kumar", specialty: "Haemato Oncology & BMT (Bone Marrow Transplant) — Associate Director", treatmentSlug: "oncology", hospital: "Max Super Speciality Hospital, Vaishali", hospitalSlug: "max-vaishali", experience: "Confirm with hospital",
+    qualifications: "MBBS (KGMC, Lucknow), MD Internal Medicine (KGMC, Lucknow), DM Clinical Haematology (SGPGIMS, Lucknow), PDCC Haemato Oncology (SGPGIMS, Lucknow)",
+    languages: ["English", "Hindi"], photo: "/doctors/dr-pradeep-kumar-haemato.jpg",
+  },
+  { slug: "dr-neerav-bansal", name: "Dr Neerav Bansal", specialty: "Cardiac Sciences, Minimal Invasive Cardiac Surgery (MICS), Cardiothoracic & Vascular Surgery (CTVS) — Director", treatmentSlug: "cardiology", hospital: "Max Super Speciality Hospital, Vaishali", hospitalSlug: "max-vaishali", experience: "Confirm with hospital",
+    qualifications: "MBBS (S. N. Medical College, Agra), MS General Surgery (S. N. Medical College, Agra), MCh Cardiovascular & Thoracic Surgery (Sree Chitra Tirunal Institute for Medical Sciences and Technology, Trivandrum)",
+    languages: ["English", "Hindi"], photo: "/doctors/dr-neerav-bansal.jpg",
+  },
+  { slug: "dr-gaurav-bansal", name: "Dr Gaurav Bansal", specialty: "Neurosurgery — Director", treatmentSlug: "neurology", hospital: "Max Super Speciality Hospital, Vaishali", hospitalSlug: "max-vaishali", experience: "Confirm with hospital",
+    qualifications: "MBBS (Post Graduate Institute of Medical Sciences, Rohtak), MS General Surgery (King George Medical University, Lucknow), MCh Neurosurgery (All India Institute of Medical Sciences, New Delhi), Clinical Spine Training (Mayo Clinic, Rochester, USA), International Fellow (American Association of Neurological Surgeons, USA)",
+    languages: ["English", "Hindi"], photo: "/doctors/dr-gaurav-bansal.jpg",
+  },
+  { slug: "dr-swasti", name: "Dr Swasti", specialty: "Surgical Oncology (Gynae) — Senior Director", treatmentSlug: "oncology", hospital: "Max Super Speciality Hospital, Vaishali", hospitalSlug: "max-vaishali", experience: "Confirm with hospital",
+    qualifications: "MBBS (S.M.S. Medical College, Jaipur, University of Rajasthan), DNB Obs and Gynae (Indraprastha Apollo Hospitals, New Delhi), Fellowship in Robotic Surgery (World Laparoscopy Hospital, Gurgaon), Diploma in Advanced Gynecological Endoscopic Surgery (Kiel and Giessen, Germany)",
+    languages: ["English", "Hindi"], photo: "/doctors/dr-swasti.jpg",
+  },
+  { slug: "dr-kanika-gupta", name: "Dr Kanika Gupta", specialty: "Surgical Oncology (Gynae & Robotic Surgery) — Principal Director", treatmentSlug: "oncology", hospital: "Max Super Speciality Hospital, Vaishali", hospitalSlug: "max-vaishali", experience: "Confirm with hospital",
+    qualifications: "MBBS and MS Obs & Gynae (Jabalpur Medical College), Fellowship in Gynae Cancer Surgeries (under Prof. Neville Hacker), training in Gynae Cancer Surgeries (M.D. Anderson Cancer Centre, Texas, USA)",
+    languages: ["English", "Hindi"], photo: "/doctors/dr-kanika-gupta.jpg",
+  },
+  { slug: "dr-meenu-walia", name: "Dr Meenu Walia", specialty: "Medical Oncology (Breast, Gynaecology, Thoracic) — Chairman", treatmentSlug: "oncology", hospital: "Max Super Speciality Hospital, Vaishali", hospitalSlug: "max-vaishali", experience: "Confirm with hospital",
+    qualifications: "MBBS (Maulana Azad Medical College), MD Internal Medicine (University of Delhi), DNB Medical Oncology & Haematology; first DNB Medical Oncologist of India",
+    languages: ["English", "Hindi"], photo: "/doctors/dr-meenu-walia.jpg",
+  },
+  { slug: "dr-pawan-gupta", name: "Dr Pawan Gupta", specialty: "Surgical Oncology, Head & Neck Oncology — Principal Director", treatmentSlug: "oncology", hospital: "Max Super Speciality Hospital, Vaishali", hospitalSlug: "max-vaishali", experience: "25+ years",
+    qualifications: "MBBS, MS General Surgery (SCB Medical College, Cuttack), M.Ch Onco-Surgery (Gujarat Cancer Research Institute, Gujarat University), FRCS (Royal College of Surgeons, Glasgow), Fellowship in Surgical Oncology (Tata Memorial Hospital)",
+    languages: ["English", "Hindi"], photo: "/doctors/dr-pawan-gupta.jpg",
+  },
+  { slug: "dr-sowrabh-kumar-arora", name: "Dr. Sowrabh Kumar Arora", specialty: "Surgical Oncology (Head & Neck) — Principal Director & Clinical Administrator", treatmentSlug: "oncology", hospital: "Max Super Speciality Hospital, Vaishali", hospitalSlug: "max-vaishali", experience: "Confirm with hospital",
+    qualifications: "MBBS (HIMS, Jolly Grant Dehradun), Diplomate of National Board Otolaryngology (Sir Ganga Ram Hospital), FHNO Head and Neck Surgery Fellowship (Regional Cancer Centre Trivandrum), Fellowship in Head and Neck Oncology (IFHNOS & MSKCC, New York)",
+    languages: ["English", "Hindi"], photo: "/doctors/dr-sowrabh-kumar-arora.jpg",
+  },
+  { slug: "dr-rajinder-kaur-saggu", name: "Dr. Rajinder Kaur Saggu", specialty: "Surgical Oncology (Breast) — Senior Director", treatmentSlug: "oncology", hospital: "Max Super Speciality Hospital, Vaishali", hospitalSlug: "max-vaishali", experience: "Confirm with hospital",
+    qualifications: "M.B.B.S (Govt. Medical College, Miraj, Maharashtra), MS General Surgery (Govt. Medical College, Patiala, Punjab), Senior Research Fellow in Breast Surgery (Tata Memorial Hospital & Research Centre, Mumbai), Trainee in Breast Oncology and Reconstructive Breast Surgery (MD Anderson Cancer Centre, Houston, Texas)",
+    languages: ["English", "Hindi"], photo: "/doctors/dr-rajinder-kaur-saggu.jpg",
+  },
+  { slug: "dr-keshav-naithani", name: "Dr Keshav Naithani", specialty: "Maxillofacial Surgery & Implantology — Principal Director", treatmentSlug: "dental", hospital: "Max Super Speciality Hospital, Vaishali", hospitalSlug: "max-vaishali", experience: "Confirm with hospital",
+    qualifications: "B.D.S, M.D.S; Fellow, International Academy of Oral Implantology",
+    languages: ["English", "Hindi"], photo: "/doctors/dr-keshav-naithani.jpg",
+  },
+];
+
+export const journeySteps = [
+  { title: "Inquiry", description: "Share your medical concern and reports through our form or WhatsApp." },
+  { title: "Medical Review", description: "Specialists review your case and outline realistic options." },
+  { title: "Hospital Recommendation", description: "We match you with hospitals suited to your specific condition." },
+  { title: "Treatment Plan", description: "You receive a written plan with procedure details and estimated costs." },
+  { title: "Visa Support", description: "We guide you through medical visa documentation requirements." },
+  { title: "Travel", description: "Arrival assistance, airport pickup, and local orientation are arranged." },
+  { title: "Treatment", description: "Your procedure takes place with a dedicated care coordinator nearby." },
+  { title: "Recovery", description: "Monitored recovery with physiotherapy or follow-up care as needed." },
+  { title: "Follow-up", description: "We help coordinate remote follow-up with your treating doctor after you return home." },
+];
+
+export const testimonials = [
+  {
+    name: "Amina H.",
+    country: "Kenya",
+    treatment: "Cardiology",
+    quote: "Every step was explained before it happened, so nothing felt uncertain when we arrived.",
+  },
+  {
+    name: "Rashed K.",
+    country: "Bangladesh",
+    treatment: "Orthopedics",
+    quote: "Our coordinator was reachable at every stage, from the first call to the flight back home.",
+  },
+  {
+    name: "Malika T.",
+    country: "Uzbekistan",
+    treatment: "IVF & Fertility",
+    quote: "The clinic answered every question honestly, including the ones we were nervous to ask.",
+  },
+];
+
+export const homeFaqs = [
+  { q: "Is TrueCare a hospital?", a: "No. TrueCare is an independent patient guidance service. We help you find and coordinate care at accredited hospitals — we don't perform treatment ourselves." },
+  { q: "How much does treatment cost?", a: "Costs vary by hospital, procedure, and complexity. After medical review, you receive a written estimate directly from the treating hospital." },
+  { q: "Do you help with visas?", a: "Yes. We guide you through medical visa documentation and connect you with the hospital's visa assistance letter when required." },
+  { q: "What languages is support available in?", a: "Our coordinators support English, Hindi, and Arabic, with translation assistance arranged for other languages where needed." },
+  { q: "Can someone travel with the patient?", a: "Yes. Most patients travel with a companion, and we help arrange accommodation for both." },
+];
+
+export const blogPosts = [
+  {
+    slug: "what-is-a-medical-visa",
+    title: "What is a Medical Visa, and Who Needs One?",
+    category: "Patient Education",
+    excerpt: "A plain-language walkthrough of medical visa requirements for patients traveling to India for treatment.",
+    readTime: "5 min read",
+  },
+  {
+    slug: "questions-to-ask-before-surgery-abroad",
+    title: "10 Questions to Ask Before Choosing to Have Surgery Abroad",
+    category: "Medical Tourism",
+    excerpt: "Practical questions that help you evaluate any hospital or provider, wherever you're considering treatment.",
+    readTime: "7 min read",
+  },
+  {
+    slug: "preparing-for-your-first-consultation",
+    title: "How to Prepare for Your First Medical Consultation",
+    category: "Patient Education",
+    excerpt: "What to gather, what to expect, and how to make the most of your first specialist review.",
+    readTime: "4 min read",
+  },
+  {
+    slug: "traveling-with-a-companion",
+    title: "Traveling for Treatment with a Companion: A Practical Guide",
+    category: "Travel",
+    excerpt: "Accommodation, local transport, and day-to-day logistics for the person accompanying a patient.",
+    readTime: "6 min read",
+  },
+];
+
+export const whyIndiaStats = [
+  { label: "JCI-accredited hospitals", value: "40+" },
+  { label: "Typical cost savings vs. US/UK", value: "60–80%" },
+  { label: "Avg. specialist experience", value: "15+ yrs" },
+  { label: "Countries served", value: "30+" },
+];
+
+export type Destination = {
+  city: string;
+  code: string;
+};
+
+export const destinations: Destination[] = [
+  { city: "Delhi NCR", code: "DEL" },
+  { city: "Mumbai", code: "BOM" },
+  { city: "Chennai", code: "MAA" },
+  { city: "Bengaluru", code: "BLR" },
+  { city: "Hyderabad", code: "HYD" },
+  { city: "Kolkata", code: "CCU" },
+];
