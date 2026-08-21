@@ -7,7 +7,7 @@ export default function TreatmentCard({ treatment }: { treatment: Treatment }) {
   return (
     <Link
       href={`/treatments/${treatment.slug}`}
-      className="group flex flex-col rounded-2xl border border-navy-100/70 bg-white p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-glow dark:border-white/10 dark:bg-white/5"
+      className="group flex flex-col rounded-xl border border-navy-100 bg-white p-6 transition-colors duration-200 hover:border-primary-300 hover:bg-primary-50/40 dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10"
     >
       <div className="flex items-center justify-between">
         <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-teal-50 text-teal-600 dark:bg-teal-500/10 dark:text-teal-300">

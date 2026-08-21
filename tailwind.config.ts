@@ -36,6 +36,24 @@ const config: Config = {
           800: "#164B40",
           900: "#0A251F",
         },
+        // Warm gold accent — reserved for the single primary conversion
+        // action (e.g. the WhatsApp CTA), not used as a general color.
+        // Inspired by TMTC's premium/concierge positioning ("5-star hotel"
+        // aftercare, chef-designed meals) rather than a literal color match —
+        // Claude could not visually sample their live site's exact values.
+        accent: {
+          DEFAULT: "#C8963E",
+          50: "#FBF4E7",
+          100: "#F5E6C9",
+          200: "#EACD97",
+          300: "#DEB465",
+          400: "#D4A34E",
+          500: "#C8963E",
+          600: "#A97B2E",
+          700: "#886023",
+          800: "#5F4319",
+          900: "#3B2A0F",
+        },
         navy: {
           DEFAULT: "#0B1E3F",
           50: "#EAEDF3",

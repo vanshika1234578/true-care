@@ -5,8 +5,9 @@ import Section from "@/components/Section";
 import Container from "@/components/Container";
 import Button from "@/components/Button";
 import FAQAccordion from "@/components/FAQAccordion";
+import TreatmentDoctorDirectory from "@/components/TreatmentDoctorDirectory";
 import { TreatmentIcon } from "@/components/IconMap";
-import { treatments } from "@/lib/data";
+import { doctors, treatments } from "@/lib/data";
 
 export function generateStaticParams() {
   return treatments.map((t) => ({ slug: t.slug }));
@@ -52,6 +53,10 @@ export default function TreatmentDetailPage({ params }: { params: { slug: string
       <Section align="left" className="pt-8">
         <div className="grid gap-10 lg:grid-cols-3">
           <div className="lg:col-span-2 space-y-10">
+            <TreatmentDoctorDirectory
+              treatmentName={treatment.name}
+              doctors={doctors.filter((doctor) => doctor.treatmentSlug === treatment.slug)}
+            />
             <div>
               <h2 className="font-display text-xl font-semibold text-navy-500 dark:text-white">
                 Overview

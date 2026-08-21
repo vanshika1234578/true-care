@@ -8,15 +8,21 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Moon, Sun, MessageCircle } from "lucide-react";
 import Container from "./Container";
 import Button from "./Button";
+import CountrySwitcher from "./CountrySwitcher";
+import NavResourcesDropdown from "./NavResourcesDropdown";
 import { useTheme } from "./ThemeProvider";
+import { countries } from "@/lib/countries";
 
 const NAV_LINKS = [
   { href: "/about", label: "About" },
   { href: "/treatments", label: "Treatments" },
   { href: "/hospitals", label: "Hospitals" },
   { href: "/doctors", label: "Doctors" },
-  { href: "/find-doctor", label: "Find a Doctor" },
   { href: "/why-india", label: "Why India" },
+];
+
+const RESOURCE_LINKS = [
+  { href: "/find-doctor", label: "Find a Doctor" },
   { href: "/patient-journey", label: "Patient Journey" },
   { href: "/patient-stories", label: "Patient Stories" },
   { href: "/blog", label: "Blog" },
@@ -96,9 +102,11 @@ export default function Header() {
               </Link>
             );
           })}
+          <NavResourcesDropdown />
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
+          <CountrySwitcher />
           <button
             aria-label="Toggle dark mode"
             onClick={toggleTheme}
@@ -153,6 +161,24 @@ export default function Header() {
                 <motion.div
                   variants={{ hidden: { opacity: 0, x: -12 }, show: { opacity: 1, x: 0 } }}
                   transition={{ duration: 0.25 }}
+                  className="my-2 border-t border-navy-100/60 pt-2 dark:border-white/10"
+                >
+                  <p className="px-3 pb-1 text-xs font-semibold uppercase tracking-wide text-navy-300 dark:text-white/50">
+                    Resources
+                  </p>
+                  {RESOURCE_LINKS.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="block rounded-lg px-3 py-3 text-base font-medium text-navy-500 hover:bg-primary-50 dark:text-white/80 dark:hover:bg-white/5"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </motion.div>
+                <motion.div
+                  variants={{ hidden: { opacity: 0, x: -12 }, show: { opacity: 1, x: 0 } }}
+                  transition={{ duration: 0.25 }}
                 >
                   <Link
                     href="/contact"
@@ -162,6 +188,28 @@ export default function Header() {
                   </Link>
                 </motion.div>
               </nav>
+
+              <motion.div
+                variants={{ hidden: { opacity: 0, x: -12 }, show: { opacity: 1, x: 0 } }}
+                transition={{ duration: 0.25 }}
+                className="mt-5 border-t border-navy-100/60 pt-5 dark:border-white/10"
+              >
+                <p className="px-3 text-xs font-semibold uppercase tracking-wide text-navy-300 dark:text-white/50">
+                  Your Country
+                </p>
+                <div className="mt-2 flex flex-col gap-1">
+                  {countries.map((country) => (
+                    <Link
+                      key={country.slug}
+                      href={`/${country.slug}`}
+                      className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm text-navy-500 hover:bg-primary-50 dark:text-white/80 dark:hover:bg-white/5"
+                    >
+                      <span>{country.flag}</span>
+                      {country.name}
+                    </Link>
+                  ))}
+                </div>
+              </motion.div>
               <motion.div
                 variants={{ hidden: { opacity: 0, y: 8 }, show: { opacity: 1, y: 0 } }}
                 transition={{ duration: 0.25 }}

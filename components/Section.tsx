@@ -28,7 +28,12 @@ export default function Section({
             }`}
           >
             {eyebrow && (
-              <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary-500">
+              <p
+                className={`mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-primary-500 ${
+                  align === "center" ? "justify-center" : "justify-start"
+                }`}
+              >
+                <span className="h-[2px] w-5 bg-accent-500" aria-hidden="true" />
                 {eyebrow}
               </p>
             )}

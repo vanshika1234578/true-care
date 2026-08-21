@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
 const inter = Inter({
@@ -69,6 +70,7 @@ export default function RootLayout({
           <main>{children}</main>
           <Footer />
           <CookieConsent />
+          <FloatingWhatsApp />
         </ThemeProvider>
       </body>
     </html>

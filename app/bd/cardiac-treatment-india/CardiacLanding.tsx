@@ -36,23 +36,19 @@ const LEAD_MODAL_SESSION_KEY = "truecare_cardiac_lead_modal_dismissed";
 
 // Real cardiac specialists already verified in the site's data — never invented.
 const FEATURED_DOCTOR_SLUGS = [
-  "dr-naresh-trehan",
-  "dr-ashok-seth",
-  "dr-balbir-singh",
-  "dr-krishnanu-dutta-choudhury",
-  "dr-manoj-luthra",
-  "dr-rajiv-c",
-  "dr-anil-kumar-r",
-  "dr-sabarinath-menon",
+  "dr-amit-kumar-chaurasia",
+  "dr-kuldeep-arora",
+  "dr-sameer-mehrotra",
+  "dr-aseem-r-srivastava",
+  "dr-surendra-nath-khanna",
 ];
 const featuredDoctors = FEATURED_DOCTOR_SLUGS.map((slug) => doctors.find((d) => d.slug === slug)).filter(
   (d): d is NonNullable<typeof d> => Boolean(d)
 );
 
 const FEATURED_HOSPITAL_SLUGS = [
-  "fortis-escorts-heart-institute-delhi",
-  "medanta-the-medicity-gurugram",
   "max-super-speciality-noida",
+  "fortis-hospital-noida",
   "aster-medcity-kochi",
 ];
 const featuredHospitals = FEATURED_HOSPITAL_SLUGS.map((slug) => hospitals.find((h) => h.slug === slug)).filter(

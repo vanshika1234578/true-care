@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Section from "@/components/Section";
-import DoctorCard from "@/components/DoctorCard";
-import { doctors } from "@/lib/data";
+import DoctorDirectory from "@/components/DoctorDirectory";
 
 export const metadata: Metadata = {
   title: "Doctors",
@@ -13,13 +12,9 @@ export default function DoctorsPage() {
     <Section
       eyebrow="Doctors"
       title="Specialists who treat international patients regularly"
-      description="Every doctor listed here is affiliated with an accredited partner hospital and has experience coordinating care across time zones and languages."
+      description="Every doctor listed here is affiliated with an accredited partner hospital and has experience coordinating care across time zones and languages. Filter by location or speciality to find the right specialist."
     >
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {doctors.map((d) => (
-          <DoctorCard key={d.slug} doctor={d} />
-        ))}
-      </div>
+      <DoctorDirectory />
     </Section>
   );
 }

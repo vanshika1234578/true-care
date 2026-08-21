@@ -29,7 +29,7 @@ import HeroGlow from "@/components/HeroGlow";
 
 const WHATSAPP_NUMBER = "919720574548";
 const LEAD_MODAL_SESSION_KEY = "truecare_bd_knee_lead_modal_dismissed";
-const doctor = doctors.find((d) => d.slug === "dr-atul-mishra");
+const doctor = doctors.find((d) => d.slug === "dr-i-p-s-oberoi");
 const hospital = hospitals.find((h) => h.slug === "fortis-hospital-noida");
 const relevantTestimonial = testimonials.find((t) => t.treatment === "Orthopedics");
 
@@ -262,9 +262,11 @@ export default function KneeReplacementLanding({ initialLang = "en" }: { initial
               <p className="mt-3 flex items-center justify-center gap-1.5 text-xs text-navy-300 dark:text-white/50">
                 <GraduationCap size={13} /> {doctor.qualifications}
               </p>
-              <p className="mt-1 text-xs text-navy-300 dark:text-white/50">
-                {doctor.experience !== "Confirm with hospital" ? doctor.experience : ""}
-              </p>
+              {doctor.experience !== "Confirm with hospital" && (
+                <p className="mt-1 text-xs text-navy-300 dark:text-white/50">
+                  {doctor.experience}
+                </p>
+              )}
 
               <div className="mt-5 border-t border-navy-100/60 pt-5 dark:border-white/10">
                 <p className="text-xs font-semibold uppercase tracking-wide text-navy-300 dark:text-white/40">
