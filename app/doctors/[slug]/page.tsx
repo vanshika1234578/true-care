@@ -53,11 +53,11 @@ export default function DoctorDetailPage({ params }: { params: { slug: string } 
         <Container>
           <div className="flex flex-col items-center gap-6 text-center sm:flex-row sm:items-start sm:text-left">
             {doctor.photo ? (
-              <div className="relative h-28 w-28 flex-none overflow-hidden rounded-full border-4 border-white shadow-glow dark:border-surface-dark sm:h-32 sm:w-32">
-                <FadeInImage src={doctor.photo} alt={doctor.name} fill className="object-cover" sizes="128px" />
+              <div className="relative h-40 w-32 flex-none overflow-hidden rounded-2xl border-4 border-white shadow-glow dark:border-surface-dark sm:h-52 sm:w-40">
+                <FadeInImage src={doctor.photo} alt={doctor.name} fill className="object-cover" sizes="160px" />
               </div>
             ) : (
-              <div className="flex h-28 w-28 flex-none items-center justify-center rounded-full border-4 border-white bg-gradient-to-br from-primary-500 to-teal-400 font-display text-3xl font-bold text-white shadow-glow dark:border-surface-dark sm:h-32 sm:w-32">
+              <div className="flex h-40 w-32 flex-none items-center justify-center rounded-2xl border-4 border-white bg-gradient-to-br from-primary-500 to-teal-400 font-display text-3xl font-bold text-white shadow-glow dark:border-surface-dark sm:h-52 sm:w-40">
                 {initials}
               </div>
             )}

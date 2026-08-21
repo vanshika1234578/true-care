@@ -16,7 +16,6 @@ import { maxSavingsPercent } from "@/lib/priceComparison";
 const WHATSAPP_NUMBER = "919720574548";
 
 export type CardiacCountryContent = {
-language?: string;
   flag: string;
   countryName: string;
   heroEyebrow: string; // e.g. "Cardiac Care · Oman → India"

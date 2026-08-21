@@ -244,11 +244,11 @@ export default function KneeReplacementLanding({ initialLang = "en" }: { initial
             </h2>
             <div className="mx-auto max-w-2xl rounded-2xl border border-navy-100/70 bg-white p-8 text-center shadow-card dark:border-white/10 dark:bg-white/5">
               {doctor.photo ? (
-                <div className="relative mx-auto h-20 w-20 overflow-hidden rounded-full">
-                  <FadeInImage src={doctor.photo} alt={doctor.name} fill className="object-cover" sizes="80px" />
+                <div className="relative mx-auto h-40 w-32 overflow-hidden rounded-2xl">
+                  <FadeInImage src={doctor.photo} alt={doctor.name} fill className="object-cover" sizes="128px" />
                 </div>
               ) : (
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-teal-400 font-display text-lg font-bold text-white">
+                <div className="mx-auto flex h-40 w-32 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500 to-teal-400 font-display text-3xl font-bold text-white">
                   {doctor.name.replace("Dr. ", "").split(" ").map((n) => n.charAt(0)).join("")}
                 </div>
               )}

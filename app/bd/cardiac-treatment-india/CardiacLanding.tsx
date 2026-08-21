@@ -267,17 +267,18 @@ export default function CardiacLanding() {
                 return (
                   <AnimatedStaggerItem
                     key={doctor.slug}
-                    className="flex flex-col items-center rounded-2xl border border-navy-100/70 bg-white p-6 text-center shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-glow dark:border-white/10 dark:bg-white/5"
+                    className="flex flex-col overflow-hidden rounded-2xl border border-navy-100/70 bg-white text-center shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-glow dark:border-white/10 dark:bg-white/5"
                   >
-                    {doctor.photo ? (
-                      <div className="relative h-16 w-16 overflow-hidden rounded-full">
-                        <FadeInImage src={doctor.photo} alt={doctor.name} fill className="object-cover" sizes="64px" />
-                      </div>
-                    ) : (
-                      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-teal-400 font-display text-base font-bold text-white">
-                        {initials}
-                      </div>
-                    )}
+                    <div className="relative aspect-[4/5] w-full overflow-hidden bg-navy-100">
+                      {doctor.photo ? (
+                        <FadeInImage src={doctor.photo} alt={doctor.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 280px" />
+                      ) : (
+                        <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary-500 to-teal-400 font-display text-3xl font-bold text-white">
+                          {initials}
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-6">
                     <h3 className="mt-3 font-display text-sm font-semibold text-navy-500 dark:text-white">
                       {doctor.name}
                     </h3>
@@ -294,6 +295,7 @@ export default function CardiacLanding() {
                     {doctor.experience !== "Confirm with hospital" && (
                       <p className="mt-1 text-[11px] text-navy-300 dark:text-white/40">{doctor.experience}</p>
                     )}
+                    </div>
                   </AnimatedStaggerItem>
                 );
               })}
