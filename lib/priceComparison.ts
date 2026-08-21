@@ -58,4 +58,3 @@ export const priceComparisonSources =
 // India price for each procedure) — not a separately sourced marketing
 // statistic. CABG comes out to ~81%, knee replacement to ~82%; this is
 // rounded down for a safety margin rather than quoting the exact maximum.
-export const maxSavingsPercent = 75;

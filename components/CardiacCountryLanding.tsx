@@ -12,11 +12,12 @@ import PriceComparisonTable from "@/components/PriceComparisonTable";
 import { AnimatedStagger, AnimatedStaggerItem } from "@/components/AnimatedStagger";
 import { doctors, hospitals, treatments } from "@/lib/data";
 import { maxSavingsPercent } from "@/lib/priceComparison";
-import { maxSavingsPercent } from "@/lib/priceComparison";
 
 const WHATSAPP_NUMBER = "919720574548";
 
 export type CardiacCountryContent = {
+language?: string;
+
   flag: string;
   countryName: string;
   heroEyebrow: string; // e.g. "Cardiac Care · Oman → India"
