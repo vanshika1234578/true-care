@@ -49,7 +49,7 @@ export async function POST(request: Request) {
           // Random, unguessable path — not linked from anywhere public, and this
           // route requires no auth to call, so keep tokens single-use and scoped.
           addRandomSuffix: true,
-          tokenPayload: JSON.stringify({ source: "knee-replacement-india-bd" }),
+          tokenPayload: JSON.stringify({ source: "medical-report-submission" }),
         };
       },
       onUploadCompleted: async ({ blob }) => {
