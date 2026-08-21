@@ -1,0 +1,9 @@
+Doctors array repaired and consolidated.
+Total doctors: 150
+Hospital counts:
+- Artemis Hospitals, Gurugram: 63
+- Aster Medcity, Kochi: 32
+- Fortis Hospital, Noida: 25
+- Max Super Speciality Hospital, Noida: 8
+- Max Super Speciality Hospital, Vaishali: 22
+Every doctor has hospital, hospitalSlug, specialty, and treatmentSlug.
