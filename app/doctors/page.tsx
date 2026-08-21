@@ -12,7 +12,7 @@ export default function DoctorsPage() {
     <Section
       eyebrow="Doctors"
       title="Specialists who treat international patients regularly"
-      description="Every doctor listed here is affiliated with an accredited partner hospital and has experience coordinating care across time zones and languages. Filter by location or speciality to find the right specialist."
+      description="Every doctor listed here is affiliated with an accredited partner hospital and has experience coordinating care across time zones and languages. Filter by location or treatment area to find the right specialist."
     >
       <DoctorDirectory />
     </Section>

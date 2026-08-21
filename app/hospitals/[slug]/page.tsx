@@ -6,7 +6,7 @@ import Section from "@/components/Section";
 import Container from "@/components/Container";
 import Button from "@/components/Button";
 import DoctorCard from "@/components/DoctorCard";
-import { hospitals, doctors } from "@/lib/data";
+import { hospitals, doctors, getHospitalSpecialties } from "@/lib/data";
 
 export function generateStaticParams() {
   return hospitals.map((h) => ({ slug: h.slug }));
@@ -74,7 +74,7 @@ export default function HospitalDetailPage({ params }: { params: { slug: string 
               Specialties
             </h2>
             <div className="mt-3 flex flex-wrap gap-2">
-              {hospital.specialties.map((s) => (
+              {getHospitalSpecialties(hospital.slug).map((s) => (
                 <span
                   key={s}
                   className="rounded-full bg-teal-50 px-3 py-1.5 text-sm font-medium text-teal-700 dark:bg-teal-500/10 dark:text-teal-300"

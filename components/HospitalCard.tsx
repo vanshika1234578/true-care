@@ -4,11 +4,15 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { MapPin, BadgeCheck } from "lucide-react";
 import FadeInImage from "./FadeInImage";
-import type { Hospital } from "@/lib/data";
+import { getHospitalSpecialties, type Hospital } from "@/lib/data";
 
 const MotionLink = motion.create(Link);
 
 export default function HospitalCard({ hospital }: { hospital: Hospital }) {
+  const specialties = getHospitalSpecialties(hospital.slug);
+  const shownSpecialties = specialties.slice(0, 4);
+  const remainingCount = specialties.length - shownSpecialties.length;
+
   return (
     <MotionLink
       href={`/hospitals/${hospital.slug}`}
@@ -51,7 +55,7 @@ export default function HospitalCard({ hospital }: { hospital: Hospital }) {
           {hospital.overview}
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          {hospital.specialties.slice(0, 4).map((s) => (
+          {shownSpecialties.map((s) => (
             <span
               key={s}
               className="rounded-full bg-teal-50 px-3 py-1 text-xs font-medium text-teal-700 dark:bg-teal-500/10 dark:text-teal-300"
@@ -59,6 +63,11 @@ export default function HospitalCard({ hospital }: { hospital: Hospital }) {
               {s}
             </span>
           ))}
+          {remainingCount > 0 && (
+            <span className="rounded-full bg-navy-50 px-3 py-1 text-xs font-medium text-navy-400 dark:bg-white/10 dark:text-white/60">
+              +{remainingCount} more
+            </span>
+          )}
         </div>
         {hospital.accreditations.length > 1 && (
           <div className="mt-4 flex flex-wrap gap-3 border-t border-navy-100/60 pt-4 dark:border-white/10">

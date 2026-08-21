@@ -20,20 +20,8 @@ type Body = {
   timeline?: string;
   source?: string;
   reportUrls?: string[];
-  lang?: "en" | "bn" | "ar";
+  lang?: "en" | "bn";
   turnstileToken?: string | null;
-  attribution?: {
-    gclid?: string;
-    gbraid?: string;
-    wbraid?: string;
-    utmSource?: string;
-    utmMedium?: string;
-    utmCampaign?: string;
-    utmTerm?: string;
-    utmContent?: string;
-    landingPage?: string;
-    capturedAt?: string;
-  } | null;
 };
 
 function isValidEmail(email: string) {
@@ -71,17 +59,16 @@ export async function POST(req: NextRequest) {
 
   const {
     name = "",
-    country = "Unknown",
+    country = "Bangladesh",
     whatsapp = "",
     email = "",
     age = "",
     condition = "",
     timeline = "",
-    source = "medical-report-submission",
+    source = "knee-replacement-india-bd",
     reportUrls = [],
     lang = "en",
     turnstileToken = null,
-    attribution = null,
   } = body;
 
   const clientIp = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
@@ -115,7 +102,6 @@ export async function POST(req: NextRequest) {
     timeline: timeline.trim() || "Not specified",
     source: source.trim(),
     reportUrls,
-    attribution,
     submittedAt: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
   };
 
@@ -123,39 +109,6 @@ export async function POST(req: NextRequest) {
     ...submission,
     reportUrls: submission.reportUrls.map((_, i) => `[report file ${i + 1}]`),
   });
-
-  // Best-effort: log this lead as a row in a Google Sheet, if configured.
-  try {
-    const sheetResult = await appendLeadToSheet([
-      submission.submittedAt,
-      submission.name,
-      submission.whatsapp,
-      submission.email,
-      submission.age,
-      submission.timeline,
-      submission.condition,
-      String(submission.reportUrls.length),
-      submission.reportUrls.join(" | "),
-      submission.source,
-      submission.attribution?.gclid || "",
-      submission.attribution?.gbraid || "",
-      submission.attribution?.wbraid || "",
-      submission.attribution?.utmSource || "",
-      submission.attribution?.utmMedium || "",
-      submission.attribution?.utmCampaign || "",
-      submission.attribution?.utmTerm || "",
-      submission.attribution?.utmContent || "",
-      submission.attribution?.landingPage || "",
-      "Lead",
-      submission.submittedAt,
-    ]);
-    if (!sheetResult.logged) {
-      console.log("Lead not logged to Google Sheet:", sheetResult.reason);
-    }
-  } catch (err) {
-    console.error("Unexpected error logging lead to Google Sheet:", err);
-  }
-
 
   const gmailUser = process.env.GMAIL_USER;
   const gmailAppPassword = process.env.GMAIL_APP_PASSWORD;
@@ -183,15 +136,6 @@ export async function POST(req: NextRequest) {
       ["Preferred timeline", submission.timeline],
       ["Campaign source", submission.source],
       ["Reports attached", String(submission.reportUrls.length)],
-      ["GCLID", submission.attribution?.gclid || "Not captured"],
-      ["GBRAID", submission.attribution?.gbraid || "Not captured"],
-      ["WBRAID", submission.attribution?.wbraid || "Not captured"],
-      ["UTM source", submission.attribution?.utmSource || "Not captured"],
-      ["UTM medium", submission.attribution?.utmMedium || "Not captured"],
-      ["UTM campaign", submission.attribution?.utmCampaign || "Not captured"],
-      ["UTM term", submission.attribution?.utmTerm || "Not captured"],
-      ["UTM content", submission.attribution?.utmContent || "Not captured"],
-      ["Landing page", submission.attribution?.landingPage || "Not captured"],
       ["Submitted at", submission.submittedAt],
     ];
 
@@ -217,7 +161,7 @@ export async function POST(req: NextRequest) {
 
     const html = `
       <div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;margin:0 auto;">
-        <h2 style="color:#0B1E3F;">New TrueCare medical inquiry — ${escapeHtml(submission.country)} / ${escapeHtml(submission.source)}</h2>
+        <h2 style="color:#0B1E3F;">New Knee Replacement Inquiry — Bangladesh Campaign</h2>
         <table style="width:100%;border-collapse:collapse;margin-bottom:20px;">${rowsHtml}</table>
         <div>
           <p style="font-weight:600;color:#0B1E3F;margin-bottom:4px;">Condition description</p>
@@ -233,10 +177,9 @@ export async function POST(req: NextRequest) {
       from: `"TrueCare Website" <${gmailUser}>`,
       to: notificationEmail,
       replyTo: submission.email !== "Not provided" ? submission.email : undefined,
-      subject: `New TrueCare medical inquiry (${submission.country}) — ${submission.name}`,
+      subject: `New knee replacement inquiry (Bangladesh) — ${submission.name}`,
       html,
       text: [
-        `Campaign: ${submission.source}`,
         `Name: ${submission.name}`,
         `Country: ${submission.country}`,
         `WhatsApp: ${submission.whatsapp}`,
@@ -266,6 +209,27 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // Best-effort: log this lead as a row in a Google Sheet, if configured.
+  try {
+    const sheetResult = await appendLeadToSheet([
+      submission.submittedAt,
+      submission.name,
+      submission.whatsapp,
+      submission.email,
+      submission.age,
+      submission.timeline,
+      submission.condition,
+      String(submission.reportUrls.length),
+      submission.reportUrls.join(" | "),
+      submission.source,
+    ]);
+    if (!sheetResult.logged) {
+      console.log("Lead not logged to Google Sheet:", sheetResult.reason);
+    }
+  } catch (err) {
+    console.error("Unexpected error logging lead to Google Sheet:", err);
+  }
+
   // Best-effort: send an automated WhatsApp confirmation to the patient.
   // Safely no-ops if WhatsApp Business API credentials aren't configured —
   // never blocks or fails the submission response.
@@ -273,7 +237,7 @@ export async function POST(req: NextRequest) {
     const result = await sendWhatsAppConfirmation({
       toWhatsappNumber: submission.whatsapp,
       patientName: submission.name,
-      templateLanguage: lang === "bn" ? "bn" : "en",
+      templateLanguage: lang,
     });
     if (!result.sent) {
       console.log("WhatsApp confirmation not sent:", result.reason);
