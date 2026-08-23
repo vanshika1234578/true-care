@@ -106,11 +106,26 @@ export default function CardiacCountryLanding({
 
       const result = await response.json();
 
-      if (!response.ok || !result.success) {
-        throw new Error(result.error || "Something went wrong");
-      }
+    if (!response.ok) {
+  throw new Error("Failed to submit");
+}
 
-      setFormStatus("success");
+// Google Ads conversion — fires only after successful submission
+if (typeof window !== "undefined") {
+  const gtag = (window as any).gtag;
+
+  if (typeof gtag === "function") {
+    gtag("event", "conversion", {
+      send_to: "AW-18387787536/rzz0CMvEjOEcEJC-_b9E",
+      value: 1.0,
+      currency: "INR",
+    });
+  }
+}
+
+setFormStatus("success");
+
+   
 
       setFormData({
         name: "",
