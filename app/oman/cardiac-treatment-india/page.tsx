@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import CardiacCountryLanding from "@/components/CardiacCountryLanding";
 import { content } from "./content";
 import { treatments } from "@/lib/data";
@@ -58,6 +59,18 @@ const breadcrumbSchema = {
 export default function Page() {
   return (
     <>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=AW-18387787536"
+        strategy="afterInteractive"
+      />
+      <Script id="google-ads-oman-cardiac" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'AW-18387787536');
+        `}
+      </Script>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
