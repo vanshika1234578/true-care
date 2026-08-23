@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Manrope, Noto_Sans_Bengali } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -53,7 +54,13 @@ export const metadata: Metadata = {
       { url: "/favicon-192.png", sizes: "192x192", type: "image/png" },
       { url: "/favicon-512.png", sizes: "512x512", type: "image/png" },
     ],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    apple: [
+      {
+        url: "/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
   },
 };
 
@@ -64,7 +71,24 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${manrope.variable} ${notoSansBengali.variable} font-body`}>
+      <body
+        className={`${inter.variable} ${manrope.variable} ${notoSansBengali.variable} font-body`}
+      >
+        {/* Google Ads global site tag */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18387787536"
+          strategy="afterInteractive"
+        />
+
+        <Script id="google-ads-tag" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-18387787536');
+          `}
+        </Script>
+
         <ThemeProvider>
           <Header />
           <main>{children}</main>
