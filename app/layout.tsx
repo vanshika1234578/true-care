@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Manrope, Noto_Sans_Bengali } from "next/font/google";
+import { Inter, Manrope, Noto_Sans_Bengali, Noto_Sans_Arabic } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -25,6 +25,14 @@ const manrope = Manrope({
 const notoSansBengali = Noto_Sans_Bengali({
   subsets: ["bengali"],
   variable: "--font-noto-bengali",
+  display: "swap",
+});
+
+// Used only on pages with Arabic content (e.g. /oman/orthopedic-treatment-india) via the
+// "font-arabic" utility class — does not change the default font on any other page.
+const notoSansArabic = Noto_Sans_Arabic({
+  subsets: ["arabic"],
+  variable: "--font-noto-arabic",
   display: "swap",
 });
 
@@ -72,7 +80,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${manrope.variable} ${notoSansBengali.variable} font-body`}
+        className={`${inter.variable} ${manrope.variable} ${notoSansBengali.variable} ${notoSansArabic.variable} font-body`}
       >
         {/* Google Ads global site tag */}
         <Script

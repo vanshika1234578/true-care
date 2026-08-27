@@ -80,6 +80,8 @@ const config: Config = {
         body: ["var(--font-inter)", "sans-serif"],
         // Used only via the "font-bengali" utility class on pages with Bengali content.
         bengali: ["var(--font-noto-bengali)", "var(--font-inter)", "sans-serif"],
+        // Used only via the "font-arabic" utility class on pages with Arabic content.
+        arabic: ["var(--font-noto-arabic)", "var(--font-inter)", "sans-serif"],
       },
       borderRadius: {
         xl2: "1.25rem",
