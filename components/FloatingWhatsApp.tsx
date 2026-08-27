@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { getConsent, CONSENT_CHANGE_EVENT } from "@/lib/consent";
+import { fireConversion } from "@/lib/analytics";
 
 const WHATSAPP_NUMBER = "919720574548";
 const DEFAULT_MESSAGE = "Hello, I'd like to know more about treatment in India.";
@@ -35,6 +36,7 @@ export default function FloatingWhatsApp() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with TrueCare on WhatsApp"
+      onClick={() => fireConversion("whatsappClick")}
       className={`fixed right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-lg transition-all hover:scale-110 sm:right-8 ${
         cookieBarVisible ? "bottom-28 sm:bottom-32" : "bottom-6 sm:bottom-8"
       }`}

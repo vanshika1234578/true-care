@@ -22,6 +22,7 @@ import {
 } from "@/components/AnimatedStagger";
 import { doctors, hospitals } from "@/lib/data";
 import { maxSavingsPercent } from "@/lib/priceComparison";
+import { fireConversion } from "@/lib/analytics";
 import { content, type Lang } from "./content";
 
 const WHATSAPP_NUMBER = "919720574548";
@@ -82,16 +83,8 @@ export default function OrthoCountryLanding({
         throw new Error("Failed to submit");
       }
 
-      if (typeof window !== "undefined") {
-        const gtag = (window as any).gtag;
-        if (typeof gtag === "function") {
-          gtag("event", "conversion", {
-            send_to: "AW-18387787536/rzz0CMvEjOEcEJC-_b9E",
-            value: 1.0,
-            currency: "INR",
-          });
-        }
-      }
+      // Primary conversion: lead form submitted successfully.
+      fireConversion("leadFormSubmit");
 
       setFormStatus("success");
       setFormData({ name: "", email: "", phone: "", message: "" });
@@ -109,9 +102,15 @@ export default function OrthoCountryLanding({
   const pendingHospitals = hospitals.filter((h) => !orthoHospitalSlugs.has(h.slug));
 
   return (
-    <div dir={isRtl ? "rtl" : "ltr"} className={isRtl ? "font-arabic" : ""}>
-      {/* Language toggle bar */}
-      <div className="border-b border-navy-100/60 bg-navy-50/60 py-2.5 dark:border-white/10 dark:bg-white/5">
+    <div>
+      {/* Language toggle bar — deliberately kept LTR and outside the dir-flip
+          wrapper below. Earlier this bar was inside the same RTL-flipping div
+          as the rest of the page, which caused it to visually swap sides and
+          reverse the English/Arabic button order every time someone switched
+          languages — a jarring "jump" rather than a stable control. A language
+          switcher should stay in a fixed position no matter which language is
+          currently active. */}
+      <div dir="ltr" className="border-b border-navy-100/60 bg-navy-50/60 py-2.5 dark:border-white/10 dark:bg-white/5">
         <Container className="flex flex-wrap items-center justify-between gap-2 text-sm">
           <span className="flex items-center gap-2 font-medium text-navy-500 dark:text-white/80">
             {t.flag} {t.badge}
@@ -137,6 +136,9 @@ export default function OrthoCountryLanding({
         </Container>
       </div>
 
+      {/* Everything below this point is the actual page content, and is the
+          only part that should flip direction for Arabic. */}
+      <div dir={isRtl ? "rtl" : "ltr"} className={isRtl ? "font-arabic" : ""}>
       {/* HERO */}
       <section className="relative overflow-hidden bg-hero-gradient py-16 dark:bg-hero-gradient-dark sm:py-24">
         <HeroGlow />
@@ -159,6 +161,8 @@ export default function OrthoCountryLanding({
               variant="secondary"
               size="lg"
               icon={<MessageCircle size={18} />}
+              target="_blank"
+              onClick={() => fireConversion("whatsappClick")}
             >
               {t.hero.ctaSecondary}
             </Button>
@@ -387,12 +391,15 @@ export default function OrthoCountryLanding({
               variant="secondary"
               size="lg"
               icon={<MessageCircle size={18} />}
+              target="_blank"
+              onClick={() => fireConversion("whatsappClick")}
             >
               {t.finalCta.secondary}
             </Button>
           </div>
         </Container>
       </section>
+      </div>
     </div>
   );
 }

@@ -13,6 +13,10 @@ type ButtonProps = {
   className?: string;
   type?: "button" | "submit";
   icon?: ReactNode;
+  // Use target="_blank" for external links (e.g. wa.me) so the current page
+  // never navigates away — this keeps any conversion-tracking ping tied to
+  // the click safe from being cut off mid-flight by the navigation.
+  target?: "_blank";
 };
 
 const base =
@@ -45,6 +49,7 @@ export default function Button({
   className = "",
   type = "button",
   icon,
+  target,
 }: ButtonProps) {
   const classes = `${base} ${variants[variant]} ${sizes[size]} ${className}`;
   const motionProps = {
@@ -55,7 +60,14 @@ export default function Button({
 
   if (href) {
     return (
-      <MotionLink href={href} className={classes} onClick={onClick} {...motionProps}>
+      <MotionLink
+        href={href}
+        className={classes}
+        onClick={onClick}
+        target={target}
+        rel={target === "_blank" ? "noopener noreferrer" : undefined}
+        {...motionProps}
+      >
         {children}
         {icon}
       </MotionLink>
