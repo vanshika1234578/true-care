@@ -158,7 +158,7 @@ export default function OrthoCountryLanding({
             </Button>
             <Button
               href={whatsappHref(t.whatsappMessage)}
-              variant="secondary"
+              variant="whatsapp"
               size="lg"
               icon={<MessageCircle size={18} />}
               target="_blank"
@@ -388,7 +388,7 @@ export default function OrthoCountryLanding({
             </Button>
             <Button
               href={whatsappHref(t.whatsappMessage)}
-              variant="secondary"
+              variant="whatsapp"
               size="lg"
               icon={<MessageCircle size={18} />}
               target="_blank"

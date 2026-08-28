@@ -8,7 +8,7 @@ type ButtonProps = {
   href?: string;
   onClick?: () => void;
   children: ReactNode;
-  variant?: "primary" | "secondary" | "ghost" | "accent";
+  variant?: "primary" | "secondary" | "ghost" | "accent" | "whatsapp";
   size?: "md" | "lg";
   className?: string;
   type?: "button" | "submit";
@@ -27,10 +27,15 @@ const variants: Record<string, string> = {
   secondary:
     "bg-white text-navy-500 border border-navy-100 hover:border-primary-300 dark:bg-surface-darkSoft dark:text-white dark:border-white/10",
   ghost: "bg-transparent text-primary-600 hover:bg-primary-50 dark:text-primary-300 dark:hover:bg-white/5",
-  // Reserved for the single primary conversion action on a page (e.g. the
-  // WhatsApp CTA) — not a general-purpose button color. Using it everywhere
-  // "primary" is used today would defeat the point of it standing out.
+  // Reserved for the single primary conversion action on a page — not a
+  // general-purpose button color. Using it everywhere "primary" is used
+  // today would defeat the point of it standing out.
   accent: "bg-accent-500 text-white shadow-glow hover:bg-accent-600",
+  // WhatsApp's own brand green — matches the color used by
+  // FloatingWhatsApp.tsx (bg-[#25D366]) so every WhatsApp entry point on
+  // the site reads as the same action instead of the CTA looking like a
+  // plain secondary/outline button next to it.
+  whatsapp: "bg-[#25D366] text-white shadow-glow hover:bg-[#20bd5a]",
 };
 
 const sizes: Record<string, string> = {
