@@ -375,7 +375,12 @@ export default function OncologyCountryLanding({
 
       {/* FAQ */}
       <Section eyebrow={t.faq.eyebrow} title={t.faq.title}>
-        <FAQAccordion faqs={t.faq.items} />
+        <FAQAccordion
+  faqs={t.faq.items.map((item) => ({
+    q: item.question,
+    a: item.answer,
+  }))}
+/>
       </Section>
 
       {/* FINAL CTA */}
