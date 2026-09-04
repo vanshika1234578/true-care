@@ -1,9 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
+// email is intentionally optional here — the Bangladesh trust-first form
+// (see app/bd/BangladeshTrustLanding.tsx) deliberately does not ask for an
+// email address, since WhatsApp/phone is the primary channel for that
+// audience and the brief it was built from explicitly keeps the first
+// form short. Other forms on the site that do collect email still work
+// unchanged, since email here is optional rather than removed.
 type ContactPayload = {
   name: string;
-  email: string;
+  email?: string;
   phone: string;
   country?: string;
   treatment?: string;
@@ -82,20 +88,20 @@ export async function POST(req: NextRequest) {
 
   const { name, email, phone, country, treatment, message } = body;
 
-  if (!name?.trim() || !email?.trim() || !phone?.trim() || !message?.trim()) {
+  if (!name?.trim() || !phone?.trim() || !message?.trim()) {
     return NextResponse.json(
-      { error: "Name, email, phone, and message are required." },
+      { error: "Name, phone, and message are required." },
       { status: 400 }
     );
   }
 
-  if (!isValidEmail(email)) {
+  if (email?.trim() && !isValidEmail(email)) {
     return NextResponse.json({ error: "Please provide a valid email address." }, { status: 400 });
   }
 
   const submission = {
     name: name.trim(),
-    email: email.trim(),
+    email: email?.trim() || "Not provided",
     phone: phone.trim(),
     country: country?.trim() || "Not specified",
     treatment: treatment?.trim() || "Not specified",
@@ -130,7 +136,10 @@ export async function POST(req: NextRequest) {
     await transporter.sendMail({
       from: `"TrueCare Website" <${gmailUser}>`,
       to: notificationEmail,
-      replyTo: submission.email,
+      // Only set replyTo when a real email was actually provided — the
+      // Bangladesh form's submissions have no email at all ("Not provided"),
+      // and that string is not a valid header value to reply to.
+      ...(submission.email !== "Not provided" ? { replyTo: submission.email } : {}),
       subject: `New inquiry from ${submission.name}`,
       html: buildEmailHtml(submission),
       text: [

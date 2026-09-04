@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import CountryHub from "@/components/CountryHub";
+import BangladeshTrustLanding from "./BangladeshTrustLanding";
 import { getCountry } from "@/lib/countries";
 
 const country = getCountry("bd")!;
@@ -10,24 +10,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  // For treatments that already have a dedicated, richer ad-campaign page
-  // (see country.treatmentPages in lib/countries.ts), link straight there
-  // instead of the generic listing.
-  const dedicatedPages = Object.fromEntries(
-    country.treatmentPages.map((p) => [p.treatmentSlug, p.path])
-  );
-
-  return (
-    <CountryHub
-      content={{
-        flag: country.flag,
-        countryName: country.name,
-        countrySlug: country.slug,
-        heroHeadline: country.heroHeadline,
-        heroSub: country.heroSub,
-        whatsappMessage: country.whatsappMessage,
-        dedicatedPages,
-      }}
-    />
-  );
+  return <BangladeshTrustLanding initialLang="en" />;
 }

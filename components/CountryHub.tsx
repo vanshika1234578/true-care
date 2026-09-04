@@ -7,6 +7,7 @@ import Button from "@/components/Button";
 import HeroGlow from "@/components/HeroGlow";
 import CountryTreatmentCard from "@/components/CountryTreatmentCard";
 import { treatments, doctors } from "@/lib/data";
+import { fireConversion } from "@/lib/analytics";
 import type { FeaturedTreatmentImage } from "@/lib/featuredTreatmentImages";
 
 const WHATSAPP_NUMBER = "919720574548";
@@ -47,7 +48,20 @@ export default function CountryHub({ content }: { content: CountryHubContent }) 
             {content.heroSub}
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Button href={whatsappHref} variant="accent" size="lg" icon={<MessageCircle size={18} />}>
+            <Button
+              href={whatsappHref}
+              variant="accent"
+              size="lg"
+              icon={<MessageCircle size={18} />}
+              target="_blank"
+              // Scoped to Bangladesh only, per request — other countries
+              // sharing this component are untouched.
+              onClick={
+                content.countrySlug === "bd"
+                  ? () => fireConversion("whatsappClick")
+                  : undefined
+              }
+            >
               Talk to Us on WhatsApp
             </Button>
           </div>
