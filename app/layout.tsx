@@ -93,7 +93,10 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
+            // Google Ads
             gtag('config', 'AW-18387787536');
+            // Google Analytics 4
+            gtag('config', 'G-WHFBP12FFB');
           `}
         </Script>
 

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import CountryHub from "@/components/CountryHub";
+import KenyaTrustLanding from "./KenyaTrustLanding";
 import { getCountry } from "@/lib/countries";
 import { africaFeaturedTreatments } from "@/lib/featuredTreatmentImages";
 
@@ -16,7 +16,7 @@ export default function Page() {
   );
 
   return (
-    <CountryHub
+    <KenyaTrustLanding
       content={{
         flag: country.flag,
         countryName: country.name,
@@ -30,3 +30,4 @@ export default function Page() {
     />
   );
 }
+

@@ -52,3 +52,18 @@ export function fireConversion(
     currency,
   });
 }
+
+/**
+ * Sends a GA4 event when the Google tag is available.
+ */
+export function trackGA4Event(
+  eventName: string,
+  parameters: Record<string, unknown> = {}
+) {
+  if (typeof window === "undefined") return;
+
+  const gtag = (window as any).gtag;
+  if (typeof gtag !== "function") return;
+
+  gtag("event", eventName, parameters);
+}

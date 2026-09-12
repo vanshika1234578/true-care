@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import CountryHub from "@/components/CountryHub";
+import NigeriaTrustLanding from "./NigeriaTrustLanding";
 import { getCountry } from "@/lib/countries";
 import { africaFeaturedTreatments } from "@/lib/featuredTreatmentImages";
 
 const country = getCountry("nigeria")!;
 
 export const metadata: Metadata = {
-  title: `Treatment in India for Patients From ${country.name}`,
-  description: `Real doctors and hospitals in India for patients from ${country.name}. Send your medical reports for a free specialist review.`,
+  title: `Medical Treatment in India for Patients from Nigeria | TrueCare`,
+  description: `Get connected with doctors and hospitals in India for treatment from Nigeria. Free medical opinion, hospital matching, visa guidance and travel support.`,
 };
 
 export default function Page() {
@@ -16,7 +16,7 @@ export default function Page() {
   );
 
   return (
-    <CountryHub
+    <NigeriaTrustLanding
       content={{
         flag: country.flag,
         countryName: country.name,
