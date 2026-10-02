@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Compass, GraduationCap, Heart, Linkedin, ShieldCheck, Users } from "lucide-react";
 import Section from "@/components/Section";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -24,6 +25,7 @@ const founders = [
     education: "IIT Roorkee",
     bio: "Focused on building the product and technology behind TrueCare's doctor-matching and patient experience.",
     linkedin: "https://www.linkedin.com/in/vanshika-singhal-bb1b66286",
+    photo: "/founders/vanshika-singhal.jpg",
   },
   {
     name: "Urva Prajapati",
@@ -31,6 +33,7 @@ const founders = [
     education: "IIT Roorkee",
     bio: "Focused on hospital partnerships and building the on-ground patient care and coordination network.",
     linkedin: "https://www.linkedin.com/in/urva-prajapati-37a692393",
+    photo: "/founders/urva-prajapati.jpg",
   },
 ];
 
@@ -85,19 +88,22 @@ export default function AboutPage() {
         description="TrueCare is led by founders who combine engineering rigor with a hands-on understanding of patient care."
       >
         <div className="grid gap-6 sm:grid-cols-2 sm:max-w-3xl sm:mx-auto">
-          {founders.map(({ name, role, education, bio, linkedin }, i) => {
-            const initials = name
-              .split(" ")
-              .map((n) => n.charAt(0))
-              .join("");
+          {founders.map(({ name, role, education, bio, linkedin, photo }, i) => {
             return (
               <AnimatedSection
                 key={name}
                 delay={i * 0.05}
                 className="flex flex-col items-center rounded-2xl border border-navy-100/70 bg-white p-8 text-center shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-glow dark:border-white/10 dark:bg-white/5"
               >
-                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-teal-400 font-display text-xl font-bold text-white">
-                  {initials}
+                <div className="h-28 w-28 overflow-hidden rounded-full bg-gradient-to-br from-primary-500 to-teal-400 p-[3px] shadow-card">
+                  <Image
+                    src={photo}
+                    alt={`${name}, ${role} of TrueCare`}
+                    width={112}
+                    height={112}
+                    sizes="112px"
+                    className="h-full w-full rounded-full object-cover"
+                  />
                 </div>
                 <h3 className="mt-4 font-display text-lg font-semibold text-navy-500 dark:text-white">
                   {name}
